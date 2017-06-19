@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements FragmentOne.OnFra
                 //mTimer1.cancel();     // no need
             }
         };
+
         init();     // init UI
 
     }
@@ -137,6 +138,9 @@ public class MainActivity extends AppCompatActivity implements FragmentOne.OnFra
 
         Log.d(TAG, "release lock: ");
         mFragmentLock.set(false);
+
+        Log.d(TAG, "update batt level.");
+        updateDebugLog2(GeneralUtil.getBatteryStatusString(this));
 
     }
 

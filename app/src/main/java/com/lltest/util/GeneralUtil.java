@@ -1,8 +1,12 @@
 package com.lltest.util;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 
 import java.util.Locale;
@@ -72,6 +76,34 @@ public class GeneralUtil {
         return tempSize;
         */
         return null;
+    }
+
+    public static String getBatteryStatusString(Context inContext) {
+        boolean result = false;
+        Intent battStatus = inContext.getApplicationContext().registerReceiver(null, new
+                IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return getBatteryLevelString(battStatus);
+    }
+
+    private static String getBatteryLevelString(Intent battStatus) {
+        if (null == battStatus) {
+            Log.e(TAG, "null battStatus Intent input!");
+            return null;
+        }
+        String result;
+
+        int level = battStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = battStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        int chargingStatus = battStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = chargingStatus == BatteryManager.BATTERY_STATUS_CHARGING || chargingStatus == BatteryManager.BATTERY_STATUS_FULL;
+        int chargerPlugged = battStatus.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        boolean isChargerPlugged = chargerPlugged == BatteryManager.BATTERY_PLUGGED_AC || chargerPlugged == BatteryManager.BATTERY_PLUGGED_USB || chargerPlugged == BatteryManager.BATTERY_PLUGGED_WIRELESS;
+        int percent = (level * 100) / scale;
+
+        result = "battery level = " + percent + ", isCharging = " + isCharging + ", " +
+                "isChargerPlugged = " + isChargerPlugged;
+        Log.v(TAG, result);
+        return result;
     }
 
 }
