@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">AndroidAppFrameworkTest</string>
+
+    <!-- button labels -->
+    <string name="go_to_f1">GO TO F1</string>
+    <string name="go_to_f2">GO TO F2</string>
+    <string name="go_home">GO HOME</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="close_myself">Close Myself</string>
+    <string name="go_to_activity1">Activity 1</string>
+    <string name="go_to_activity2">Activity 2</string>
+    <string name="start_sub_act_3">Sub Activity 3</string>
+    <string name="timer">Timer Test</string>
+
+    <!-- Texts -->
+    <string name="tbd">TBD</string>
+    <string name="info">Information</string>
+    <string name="opt">Operations</string>
+    <string name="others">Other Info</string>
+
+    <string name="debug_log_1">debug log 1</string>
+    <string name="debug_log_2">debug log 2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
