@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="3"
+    android:baselineAligned="false"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    tools:context="com.lltest.appFrameTest.Activity2">
+
+    <!-- Upper part -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:showDividers="middle"
+        android:orientation="vertical">
+
+        <!-- Upper Internal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:showDividers="middle"
+            android:orientation="horizontal">
+
+            <!-- Upper Left -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:showDividers="middle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/opt" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#336666"
+                    android:scrollbarStyle="outsideOverlay"
+                    style="@android:style/Widget.DeviceDefault.ScrollView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="0dp"
+                        android:baselineAligned="false"
+                        android:orientation="vertical"
+                        android:showDividers="middle" >
+
+                        <Button
+                            android:id="@+id/act1_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/main_activity"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </LinearLayout>
+
+            <!-- Upper Right -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:showDividers="middle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/info" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#336666"
+                    android:scrollbarStyle="outsideOverlay"
+                    style="@android:style/Widget.DeviceDefault.ScrollView">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginTop="0dp"
+                        android:baselineAligned="false"
+                        android:orientation="vertical"
+                        android:showDividers="middle" >
+
+                        <TextView
+                            android:id="@+id/txt_debug_2_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="#FFFFFF"
+                            android:text="@string/debug_log_1" />
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- Lower part -->
+    <LinearLayout
+        android:id="@+id/linear_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:showDividers="middle"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/others" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#336666"
+            android:scrollbarStyle="outsideOverlay"
+            style="@android:style/Widget.DeviceDefault.ScrollView">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:showDividers="middle" >
+
+                <TextView
+                    android:id="@+id/txt_debug_2_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/debug_log_2" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

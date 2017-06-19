@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="3"
+    android:baselineAligned="false"
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    tools:context="com.lltest.appFrameTest.MainActivity">
+
+    <!-- Upper part -->
+    <LinearLayout
+        android:id="@+id/linear_layout_up"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:showDividers="middle"
+        android:orientation="vertical">
+
+        <!-- Upper Internal -->
+        <LinearLayout
+            android:id="@+id/linear_layout_upper_internal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:showDividers="middle"
+            android:orientation="horizontal">
+
+            <!-- Upper Left -->
+            <LinearLayout
+                android:id="@+id/linear_layout_upper1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:showDividers="middle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/opt" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:scrollbarStyle="outsideOverlay"
+                    style="@android:style/Widget.DeviceDefault.ScrollView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="0dp"
+                        android:baselineAligned="false"
+                        android:orientation="vertical"
+                        android:showDividers="middle" >
+
+                        <Button
+                            android:id="@+id/f1_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/go_to_f1"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:id="@+id/f2_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/go_to_f2"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:id="@+id/act2_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/go_to_activity2"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:id="@+id/sub_act3_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/start_sub_act_3"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:id="@+id/btn_timer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/timer"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </LinearLayout>
+
+            <!-- Upper Right -->
+            <LinearLayout
+                android:id="@+id/linear_layout_upper2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:showDividers="middle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/info" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:scrollbarStyle="outsideOverlay"
+                    style="@android:style/Widget.DeviceDefault.ScrollView">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginTop="0dp"
+                        android:baselineAligned="false"
+                        android:orientation="vertical"
+                        android:showDividers="middle" >
+
+                        <TextView
+                            android:id="@+id/txt_debug_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="#FFFFFF"
+                            android:text="@string/debug_log_1" />
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- Lower part -->
+    <LinearLayout
+        android:id="@+id/linear_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:showDividers="middle"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/others" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:scrollbarStyle="outsideOverlay"
+            style="@android:style/Widget.DeviceDefault.ScrollView">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:showDividers="middle" >
+
+                <TextView
+                    android:id="@+id/txt_debug_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:text="@string/debug_log_2" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>
