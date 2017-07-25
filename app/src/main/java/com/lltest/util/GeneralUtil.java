@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 
@@ -104,6 +105,22 @@ public class GeneralUtil {
                 "isChargerPlugged = " + isChargerPlugged;
         Log.v(TAG, result);
         return result;
+    }
+
+    /**
+     * Display alert dialog with title and message
+     *
+     * @param context
+     * @param title
+     * @param message
+     */
+    public static void showMessage(Context context, String title, String message)
+    {
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 
 }

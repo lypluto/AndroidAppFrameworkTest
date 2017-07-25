@@ -97,7 +97,7 @@
                             android:id="@+id/sub_act3_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/start_sub_act_3"
+                            android:text="@string/db_sub_act"
                             android:textStyle="bold"
                             android:clickable="true" />
 
