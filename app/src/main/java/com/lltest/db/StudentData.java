@@ -121,10 +121,10 @@ public class StudentData {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "Roll Num =" + mRollNum +
-                ", Name ='" + mName + '\'' +
-                ", Mark =" + mMark +
+        return "Student {" +
+                "Roll Num = " + mRollNum +
+                ", Name = " + mName +
+                ", Mark = " + mMark +
                 '}';
     }
 }

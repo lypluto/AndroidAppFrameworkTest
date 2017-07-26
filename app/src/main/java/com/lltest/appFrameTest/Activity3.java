@@ -26,26 +26,20 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
 
     private String mResultStr = "EMPTY";
 
-    // student DB constants:
-    private static final String DB_NAME_STUDENT = "StudentDB";
-    private static final String TABLE_NAME_STUDENT = "student";
-    private static final String COL_ROLL_NUM = "rollno";
-    private static final String COL_NAME = "name";
-    private static final String COL_MARKS = "marks";
-
-
     // variables for student DB test:
-    EditText mEditRollNum, mEditName, mEditMarks;
-    Button mBtnAdd, mBtnDelete, mBtnModify, mBtnView, mBtnViewAll, mBtnShowInfo;
-    SQLiteDatabase mDb;
+    private EditText mEditRollNum, mEditName, mEditMarks;
+    private Button mBtnAdd, mBtnDelete, mBtnModify, mBtnView, mBtnViewAll, mBtnShowInfo;
 
-
-    StudentDbManager mDbMgr;
+    private StudentDbManager mDbMgr;    // database manager
 
 
     @Override
     public void onClick(View view) {
-
+        if (mDbMgr == null) {
+            Log.e(TAG, "null mDbMgr!");
+            showMessage(this, "Error", "No DB manager!");
+            return;
+        }
         // insert record operation:
         if (view == mBtnAdd) {
             if (mEditRollNum.getText().toString().trim().length() == 0||
@@ -129,13 +123,9 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
         // View all records:
         if (view == mBtnViewAll) {
             List<StudentData> list = mDbMgr.getAllAccounts();
-            if (null == list || 0 == list.size()) {
-                showMessage(this, "Student Details", "Empty");
-                clearText();
-                return;
-            }
-            showMessage(this, "Student Details", String.valueOf(list));
-            mResultStr = String.valueOf(list);
+            String result = getStudentsListString(list);
+            showMessage(this, "Student Details", result);
+            mResultStr = result;
         }
 
         // show help info:
@@ -146,6 +136,7 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3);
 
@@ -168,29 +159,8 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
         mBtnViewAll.setOnClickListener(this);
         mBtnShowInfo.setOnClickListener(this);
 
-
-        /*
-        // Create DB and table:
-        // open DB "StudentDB", create it if there is no such a DB:
-        // MODE_PRIVATE indicates that the database file can only be accessed
-        // by the calling application or all applications sharing the same user ID.
-        // The third parameter is a Cursor factory object which can be left null if not required.
-        mDb = openOrCreateDatabase(DB_NAME_STUDENT, Context.MODE_PRIVATE, null);
-
-        // execSQL() function executes any SQL command.
-        // Here it is used to create the student table if it does not already exist in the database.
-        // table is called student, and three columns: rollno, name, and marks;
-        // VARCHAR represents variable length character string;
-        mDb.execSQL("CREATE TABLE IF NOT EXISTS " +
-                TABLE_NAME_STUDENT + " (" +
-                COL_ROLL_NUM + " VARCHAR," +
-                COL_NAME +  " VARCHAR," +
-                COL_MARKS + " VARCHAR)");
-        */
-
         // init DB manager:
         mDbMgr = StudentDbManager.getInstance(getApplicationContext());
-
 
         mFinish = (Button) findViewById(R.id.finish3_btn);
 
@@ -207,7 +177,8 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onDestroy() {
-        mDbMgr.closeDb();
+        Log.d(TAG, "onDestroy");
+        //mDbMgr.closeDb();
         super.onDestroy();
     }
 
@@ -219,8 +190,6 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
 
         updateDebugLog1(infoFromAct1);
         */
-
-
     }
 
     /**
@@ -243,5 +212,30 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
         returnIntent.putExtra(ACT_3_RESULT_BUNDLE, resultBundle);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
+    }
+
+    /**
+     * Convert List<StudentData> to String
+     *
+     * @param students
+     * @return
+     */
+    private String getStudentsListString(List<StudentData> students) {
+        if (null == students || 0 == students.size()) {
+            Log.i(TAG, "empty students list!");
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Student DB:\n[\n");
+        for (int i = 0; i < students.size(); i++) {
+            sb.append("\t\t");
+            sb.append(students.get(i).toString());
+            if (i < (students.size() - 1)) {
+                sb.append("\n\n");
+            }
+        }
+        sb.append("\n]");
+        Log.d(TAG, "students: " + sb.toString());
+        return sb.toString();
     }
 }
