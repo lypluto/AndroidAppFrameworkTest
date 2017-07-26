@@ -128,7 +128,9 @@ public class StudentDbOpenHelper extends SQLiteOpenHelper {
     }
 
     public void closeDatabase() {
+        Log.d(TAG, "closeDatabase.");
         if (mDb != null && mDb.isOpen()) {
+            Log.d(TAG, "mDb.close()");
             mDb.close();
             mDb = null;
         }

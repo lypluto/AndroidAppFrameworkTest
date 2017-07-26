@@ -43,6 +43,7 @@ public class StudentDbManager {
     }
 
     public void closeDb() {
+        Log.i(TAG, "closeDb()");
         if (null != mDbHelper) {
             mDbHelper.closeDatabase();
         }
@@ -160,6 +161,10 @@ public class StudentDbManager {
     }
 
     public List<StudentData> getAllAccounts() {
+        if (mDb == null) {
+            Log.e(TAG, "getAllAccounts: null DB!");
+            return null;
+        }
         List<StudentData> resultList = new ArrayList<>();
 
         Cursor cursor = mDb.rawQuery(StudentData.AccountTable.SELECTION_ALL, null);
