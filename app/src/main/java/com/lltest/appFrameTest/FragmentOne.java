@@ -147,7 +147,7 @@ public class FragmentOne extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onPause, reset fragment lock to false.");
+        Log.d(TAG, "onResume, reset fragment lock to false.");
         ((MainActivity)getActivity()).setFragmentLock(false);
     }
 
