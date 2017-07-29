@@ -112,10 +112,15 @@ public class FragmentSharedPrefsTest extends Fragment implements View.OnClickLis
         if (view == mBtnBack) {
             Log.d(TAG, "onClick: back");
             unloadMyself();
+            return;
         }
 
         if (view == mBtnUpdate) {
             Log.d(TAG, "onClick: update");
+            if (mEditNewHigh.getText().toString().trim().length() == 0) {
+                showMessage(getContext(), "Error", "Please enter value");
+                return;
+            }
             String newHigh = mEditNewHigh.getText().toString().trim();
             boolean result = updateNewHigh(Long.valueOf(newHigh));
             if (result) {
@@ -124,6 +129,7 @@ public class FragmentSharedPrefsTest extends Fragment implements View.OnClickLis
                 showMessage(getContext(), "Fail", "Failed to update new high score");
             }
             clearText();
+            return;
         }
 
         if (view == mBtnView) {
@@ -131,10 +137,12 @@ public class FragmentSharedPrefsTest extends Fragment implements View.OnClickLis
 
             long result = getNewHigh();
             showMessage(getContext(), "New High", String.valueOf(result));
+            return;
         }
 
         if (view == mBtnDelete) {
             Log.d(TAG, "onClick: delete");
+            return;
         }
     }
 
