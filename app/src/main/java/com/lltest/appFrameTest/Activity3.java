@@ -17,6 +17,11 @@ import java.util.List;
 
 import static com.lltest.util.GeneralUtil.showMessage;
 
+/**
+ * This sub activity is used to test basic DB operations.
+ *
+ *
+ */
 public class Activity3 extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "Activity3";
     public static final String ACT_3_RESULT_BUNDLE = "resultBundleFrom3";

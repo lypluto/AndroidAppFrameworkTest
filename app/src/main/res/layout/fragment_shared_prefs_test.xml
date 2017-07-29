@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_shared_prefs_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.lltest.appFrameTest.FragmentSharedPrefsTest">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:showDividers="middle"
+        android:orientation="vertical">
+
+        <TextView android:text="@string/shared_prefs_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- table for edit info -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Row #1 -->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:text="@string/shared_prefs_text_enter_new_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/editNewHigh"
+                    android:inputType="number"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+
+            <!-- Row #2 -->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView android:text="@string/tbd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/editName"
+                    android:inputType="text"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+
+            <!-- Row #3 -->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:text="@string/tbd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/editMarks"
+                    android:inputType="number"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <!-- table for buttons -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Row #1 -->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Button	  android:id="@+id/btnSharedPrefsView"
+                    android:text="@string/shared_prefs_view"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"/>
+                <Button	  android:id="@+id/btnSharedPrefsUpdate"
+                    android:text="@string/shared_prefs_update"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"/>
+
+            </TableRow>
+
+            <!-- Row #2 -->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Button   android:id="@+id/btnSharedPrefsDelete"
+                    android:text="@string/shared_prefs_delete"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"/>
+                <Button   android:id="@+id/btnSharedPrefsBack"
+                    android:text="@string/shared_prefs_back"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"/>
+
+            </TableRow>
+
+            <!-- Row #3 -->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Button
+                    android:text="@string/tbd"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"/>
+                <Button
+                    android:text="@string/tbd"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

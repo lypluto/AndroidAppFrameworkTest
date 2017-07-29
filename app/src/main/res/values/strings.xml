@@ -25,7 +25,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- DB test labels -->
-    <string name="db_sub_act">DB Sub Act</string>
+    <string name="db_sub_act">DB Test</string>
     <string name="title">Student Details</string>
     <string name="roll_no">Enter Roll #: </string>
     <string name="name">Enter Name: </string>
@@ -36,5 +36,16 @@
     <string name="view">View</string>
     <string name="view_all">View All</string>
     <string name="show_info">Show Info</string>
+
+    <!-- Shared Prefs labels -->
+    <string name="shared_prefs_label">SharedPrefs Test</string>
+    <string name="shared_prefs_page_title">New High Score Details:</string>
+    <string name="shared_prefs_delete">Delete</string>
+    <string name="shared_prefs_update">Update</string>
+    <string name="shared_prefs_view">View</string>
+    <string name="shared_prefs_back">Back</string>
+    <string name="shared_prefs_text_enter_new_high">Enter new high score:</string>
+    <string name="saved_high_score_default">saved_high_score_default</string>
+    <string name="saved_high_score">saved_high_score</string>
 
 </resources>

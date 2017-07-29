@@ -16,8 +16,10 @@ import com.lltest.util.GeneralUtil;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MainActivity extends AppCompatActivity implements FragmentOne.OnFragmentInteractionListener, FragmentTwo
-        .OnFragmentInteractionListener2 {
+public class MainActivity extends AppCompatActivity implements
+        FragmentOne.OnFragmentInteractionListener,
+        FragmentTwo.OnFragmentInteractionListener2,
+        FragmentSharedPrefsTest.OnFragmentInteractionListenerSharedPrefs {
 
     static private final String TAG = "MainActivity";
 
@@ -28,13 +30,8 @@ public class MainActivity extends AppCompatActivity implements FragmentOne.OnFra
     public static final String ACT_1_INFO_KEY = "infoFromAct1";
 
     // UI components variables:
-    private Button mBtnF1;
-    private Button mBtnF2;
-    private Button mBtnTimer;
-    private Button mBtnActivity2;
-    private Button mBtnSubAct3;
-    private TextView mTxtDebug1;
-    private TextView mTxtDebug2;
+    private Button mBtnF1, mBtnF2, mBtnTimer, mBtnActivity2, mBtnSubAct3, mBtnSharedPrefsTest;
+    private TextView mTxtDebug1, mTxtDebug2;
 
     // count down timer test variables:
     private CountDownTimer mTimer1;
@@ -62,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements FragmentOne.OnFra
         mBtnTimer = (Button) findViewById(R.id.btn_timer);
         mBtnActivity2 = (Button) findViewById(R.id.act2_btn);
         mBtnSubAct3 = (Button) findViewById(R.id.sub_act3_btn);
+
+        mBtnSharedPrefsTest = (Button) findViewById(R.id.btnSharedPrefsTest);
 
         mTxtDebug1 = (TextView) findViewById(R.id.txt_debug_1);
         mTxtDebug2 = (TextView) findViewById(R.id.txt_debug_2);
@@ -97,6 +96,14 @@ public class MainActivity extends AppCompatActivity implements FragmentOne.OnFra
             public void onClick(View v) {
                 Log.d(TAG, "mBtnSubAct3 is clicked");
                 startSubAct3();
+            }
+        });
+
+        mBtnSharedPrefsTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnSharedPrefsTest is clicked");
+                loadFragmentSharedPrefsTest();
             }
         });
 
@@ -209,6 +216,16 @@ public class MainActivity extends AppCompatActivity implements FragmentOne.OnFra
                 .add(android.R.id.content, fragment2, Constants.FRAGMENT_TWO_TAG)
                 .commitAllowingStateLoss();
         //}
+    }
+
+    public void loadFragmentSharedPrefsTest() {
+        Log.v(TAG, "loadFragmentSharedPrefsTest");
+        FragmentSharedPrefsTest fragmentSharedPrefs;
+        fragmentSharedPrefs = FragmentSharedPrefsTest.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .add(android.R.id.content, fragmentSharedPrefs, Constants.FRAGMENT_SHARED_PREFS_TAG)
+                .commitAllowingStateLoss();
+
     }
 
     // Timer tasks:
@@ -337,6 +354,11 @@ public class MainActivity extends AppCompatActivity implements FragmentOne.OnFra
 
     @Override
     public void onFragmentInteraction2(Uri uri) {
+        // do nothing
+    }
+
+    @Override
+    public void OnFragmentInteractionListenerSharedPrefs(Uri uri) {
         // do nothing
     }
 }

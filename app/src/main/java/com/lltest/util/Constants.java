@@ -8,6 +8,7 @@ public class Constants {
 
     public static final String FRAGMENT_ONE_TAG = "fragment_one";
     public static final String FRAGMENT_TWO_TAG = "fragment_two";
+    public static final String FRAGMENT_SHARED_PREFS_TAG = "fragment_shared_prefs_test";
 
     public static final int REQUEST_CODE = 1001;
 
