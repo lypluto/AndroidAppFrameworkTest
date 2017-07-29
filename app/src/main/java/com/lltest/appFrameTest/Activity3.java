@@ -66,6 +66,7 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
             }
 
             clearText();
+            return;
         }
 
         // delete record operation:
@@ -83,6 +84,7 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
                 showMessage(this, "Fail", "Failed to delete the record!");
             }
             clearText();
+            return;
         }
 
         // update operation:
@@ -106,6 +108,7 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
                 showMessage(this, "Fail", "Failed to update the record!");
             }
             clearText();
+            return;
         }
 
         // View one record:
@@ -123,6 +126,7 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
             }
             mEditName.setText(record.getName());
             mEditMarks.setText(String.valueOf(record.getMark()));
+            return;
         }
 
         // View all records:
@@ -131,11 +135,13 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
             String result = getStudentsListString(list);
             showMessage(this, "Student Details", result);
             mResultStr = result;
+            return;
         }
 
         // show help info:
         if (view == mBtnShowInfo) {
             showMessage(this, "Student Management System", "Developed By LL");
+            return;
         }
     }
 
