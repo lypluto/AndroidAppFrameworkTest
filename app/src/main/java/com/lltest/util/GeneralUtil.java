@@ -1,15 +1,19 @@
 package com.lltest.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -114,13 +118,105 @@ public class GeneralUtil {
      * @param title
      * @param message
      */
-    public static void showMessage(Context context, String title, String message)
-    {
+    public static void showMessage(Context context, String title, String message) {
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
+    }
+
+    private static long sClickStamp = 0L;
+
+    /**
+     * This method is used to check if click happens within 1 sec.
+     *
+     * @return
+     */
+    public static boolean checkClickValidate() {
+
+        // Returns milliseconds since boot, including time spent in sleep.
+        long current = SystemClock.elapsedRealtime();
+        boolean valid = false;
+        if (current - sClickStamp > Constants.CLICK_INTERVAL_LIMIT) {
+            sClickStamp = current;
+            valid = true;
+        } else {
+            Log.d(TAG, "click too fast: " + (current - sClickStamp) + "ms");
+        }
+        return valid;
+    }
+
+    /**
+     * This method is used to reset the content of a TextView to empty string.
+     * @param ctx
+     * @param logView
+     */
+    public static void clearTextViewInfo(Context ctx, final TextView logView) {
+        if (null == logView) {
+            Log.e(TAG, "invalid TextView input!");
+            return;
+        }
+        if (null == ctx || !(ctx instanceof Activity)) {
+            Log.e(TAG, "invalid context input!");
+            return;
+        }
+        // Update UI:
+        ((Activity) ctx).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                logView.setText("");
+            }
+        });
+    }
+
+    /**
+     * This method is used to reset the contents of a list of TextViews all to empty strings.
+     *
+     * @param ctx
+     * @param viewList
+     */
+    public static  void clearMultiTextViewInfo(Context ctx, final List<TextView> viewList) {
+        if (null == viewList || 0 == viewList.size()) {
+            Log.e(TAG, "invalid TextView input!");
+            return;
+        }
+        if (null == ctx || !(ctx instanceof Activity)) {
+            Log.e(TAG, "invalid context input!");
+            return;
+        }
+        for (TextView v : viewList) {
+            if (null != v) {
+                clearTextViewInfo(ctx, v);
+            }
+        }
+    }
+
+    /**
+     * This method is used to reset the content of a TextView to empty string.
+     * @param ctx
+     * @param logView
+     */
+    public static void appendTextViewInfo(Context ctx, final TextView logView, final String inStr) {
+        if (null == logView) {
+            Log.e(TAG, "invalid TextView input!");
+            return;
+        }
+        if (null == ctx || !(ctx instanceof Activity)) {
+            Log.e(TAG, "invalid context input!");
+            return;
+        }
+        // Update UI:
+        ((Activity) ctx).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                String existingStr = (String) logView.getText();     // cache
+                StringBuilder sb;
+                sb = new StringBuilder("");
+                sb.append("\n").append(inStr).append("\n\n").append(existingStr);
+                logView.setText(sb.toString());
+            }
+        });
     }
 
 }

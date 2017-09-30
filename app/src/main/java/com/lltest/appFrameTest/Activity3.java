@@ -2,16 +2,18 @@ package com.lltest.appFrameTest;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.lltest.db.StudentData;
 import com.lltest.db.StudentDbManager;
+import com.lltest.util.GeneralUtil;
 
 import java.util.List;
 
@@ -248,5 +250,23 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
         sb.append("\n]");
         Log.d(TAG, "students: " + sb.toString());
         return sb.toString();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        int action = ev.getAction() & MotionEvent.ACTION_MASK;
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                if (!GeneralUtil.checkClickValidate()) {
+                    Log.v(TAG, "click too fast, ignore");
+                    Toast.makeText(getApplicationContext(), "Please click slowly.", Toast.LENGTH_LONG)
+                            .show();
+                    return false;
+                }
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

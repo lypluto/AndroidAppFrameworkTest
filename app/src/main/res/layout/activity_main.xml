@@ -93,13 +93,15 @@
                             android:textStyle="bold"
                             android:clickable="true" />
 
-                        <Button
-                            android:id="@+id/btn_timer"
+                        <Switch
+                            android:id="@+id/timer_switch"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/timer"
                             android:textStyle="bold"
-                            android:clickable="true" />
+                            android:textColor="@color/colorWhite"
+                            android:clickable="true"
+                            android:paddingLeft="25dp"
+                            android:text="@string/timer" />
 
                         <Button
                             android:id="@+id/sub_act3_btn"
