@@ -16,8 +16,76 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.lltest.appFrameTest.Activity2" />
-        <activity android:name=".Activity3"></activity>
+
+        <activity android:name="com.lltest.appFrameTest.Activity2"
+            >
+
+        </activity>
+
+
+        <activity android:name="com.lltest.appFrameTest.Activity3">
+
+        </activity>
+
+        <!-- need to test excludeFromRecents -->
+        <activity
+            android:name="com.lltest.appFrameTest.Activity4"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            >
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="https"
+                    android:host="ecomm.stg.mpay.samsung.com"
+                    android:pathPrefix="/ew/v1/vco/checkout" />
+                <data
+                    android:scheme="https"
+                    android:host="ecomm.mpay.samsung.com"
+                    android:pathPrefix="/ew/v1/vco/checkout" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="lltest"
+                    android:host="lltest" />
+            </intent-filter>
+
+            <!-- Accept chrome links -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="lltest"
+                    android:host="lltest"
+                    android:pathPrefix="/" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="https"
+                    android:host="lltest"
+                    android:pathPrefix="/" />
+            </intent-filter>
+
+        </activity>
+
+
+
+        <activity
+            android:name="com.lltest.appFrameTest.ExitActivity"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:autoRemoveFromRecents="true"/>
 
     </application>
 

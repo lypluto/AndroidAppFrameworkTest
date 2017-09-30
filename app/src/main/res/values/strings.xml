@@ -11,6 +11,8 @@
     <string name="go_to_activity2">Activity 2</string>
     <string name="start_sub_act_3">Sub Activity 3</string>
     <string name="timer">Timer Test</string>
+    <string name="click_test_label">Click Test</string>
+    <string name="clear_info_label">Clear Info</string>
 
     <!-- Texts -->
     <string name="tbd">TBD</string>

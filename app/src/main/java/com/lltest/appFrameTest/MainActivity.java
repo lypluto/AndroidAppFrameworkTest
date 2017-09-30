@@ -4,12 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lltest.util.Constants;
 import com.lltest.util.GeneralUtil;
@@ -30,7 +36,9 @@ public class MainActivity extends AppCompatActivity implements
     public static final String ACT_1_INFO_KEY = "infoFromAct1";
 
     // UI components variables:
-    private Button mBtnF1, mBtnF2, mBtnTimer, mBtnActivity2, mBtnSubAct3, mBtnSharedPrefsTest;
+    private View mRootView;
+    private Button mBtnF1, mBtnF2, mBtnActivity2, mBtnSubAct3, mBtnSharedPrefsTest;
+    private Switch mSwitchTimer;
     private TextView mTxtDebug1, mTxtDebug2;
 
     // count down timer test variables:
@@ -44,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements
     // the lock will be released in fragment's onPause().
     private static AtomicBoolean mFragmentLock = new AtomicBoolean(false);
 
+    private MiniGestureDetector gestureDetector;
+    private GestureDetectorCompat detector;
 
 
     @Override
@@ -51,89 +61,14 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d(TAG, "onCreate()");
+        mRootView = findViewById(R.id.activity_main);
 
-        mBtnF1 = (Button) findViewById(R.id.f1_btn);
-        mBtnF2 = (Button) findViewById(R.id.f2_btn);
+        Log.d(TAG, "LL: MainActivity onCreate()");
 
-        mBtnTimer = (Button) findViewById(R.id.btn_timer);
-        mBtnActivity2 = (Button) findViewById(R.id.act2_btn);
-        mBtnSubAct3 = (Button) findViewById(R.id.sub_act3_btn);
+        // In OnCreate or custome view constructor (which extends one of Android views)
+        //detector = new GestureDetectorCompat(getApplicationContext(), gestureDetector);
 
-        mBtnSharedPrefsTest = (Button) findViewById(R.id.btnSharedPrefsTest);
-
-        mTxtDebug1 = (TextView) findViewById(R.id.txt_debug_1);
-        mTxtDebug2 = (TextView) findViewById(R.id.txt_debug_2);
-
-
-
-        mBtnF1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnF1 is clicked");
-                loadFragmentOne();
-            }
-        });
-
-        mBtnF2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnF2 is clicked");
-                loadFragmentTwo();
-            }
-        });
-
-        mBtnActivity2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnActivity2 is clicked");
-                startActivity2();
-            }
-        });
-
-        mBtnSubAct3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnSubAct3 is clicked");
-                startSubAct3();
-            }
-        });
-
-        mBtnSharedPrefsTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnSharedPrefsTest is clicked");
-                loadFragmentSharedPrefsTest();
-            }
-        });
-
-        mBtnTimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnTimer is clicked");
-                mTxtDebug2.setText("");     // reset debug log2
-                updateDebugLog1("Timer is started.");
-                mTimer1.start();
-            }
-        });
-
-        // implement the timer object.
-        // once the mTimer1.start() is called, the timer starts ticking.
-        // once the mTimer2.cancel() is called, the timer stops.
-        mTimer1 = new CountDownTimer(FINISH_TIME, TICK_TIME) {
-            public void onTick(long millisUntilFinished) {
-                Log.v(TAG, "timer onTick.");
-                doTimerTickTask();
-            }
-
-            public void onFinish() {
-                Log.v(TAG, "timer onFinish. cancel timer");
-                updateDebugLog1("Timer is finished.");
-                doTimerDoneTask();
-                //mTimer1.cancel();     // no need
-            }
-        };
-
+        initUI();
         init();     // init UI
 
     }
@@ -237,7 +172,102 @@ public class MainActivity extends AppCompatActivity implements
         updateDebugLog2("Timer Finish");
     }
 
-    // UI update APIs:
+    /**
+     * Initialize UI
+     *
+     */
+    private void initUI() {
+        mBtnF1 = (Button) findViewById(R.id.f1_btn);
+        mBtnF2 = (Button) findViewById(R.id.f2_btn);
+        mBtnActivity2 = (Button) findViewById(R.id.act2_btn);
+        mBtnSubAct3 = (Button) findViewById(R.id.sub_act3_btn);
+        mBtnSharedPrefsTest = (Button) findViewById(R.id.btnSharedPrefsTest);
+
+        mSwitchTimer = (Switch) findViewById(R.id.timer_switch);
+
+        mTxtDebug1 = (TextView) findViewById(R.id.txt_debug_1);
+        mTxtDebug2 = (TextView) findViewById(R.id.txt_debug_2);
+
+
+
+        mBtnF1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnF1 is clicked");
+                loadFragmentOne();
+            }
+        });
+
+        mBtnF2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnF2 is clicked");
+                loadFragmentTwo();
+            }
+        });
+
+        mBtnActivity2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnActivity2 is clicked");
+                startActivity2();
+            }
+        });
+
+        mBtnSubAct3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnSubAct3 is clicked");
+                startSubAct3();
+            }
+        });
+
+        mBtnSharedPrefsTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnSharedPrefsTest is clicked");
+                loadFragmentSharedPrefsTest();
+            }
+        });
+
+        // implement the timer object.
+        // once the mTimer1.start() is called, the timer starts ticking.
+        // once the mTimer2.cancel() is called, the timer stops.
+        mTimer1 = new CountDownTimer(FINISH_TIME, TICK_TIME) {
+            public void onTick(long millisUntilFinished) {
+                Log.v(TAG, "timer onTick.");
+                doTimerTickTask();
+            }
+
+            public void onFinish() {
+                Log.v(TAG, "timer onFinish. cancel timer");
+                updateDebugLog1("Timer is finished.");
+                doTimerDoneTask();
+                mSwitchTimer.setChecked(false); // Timer finished, reset switch status
+                //mTimer1.cancel();     // no need
+            }
+        };
+
+        mSwitchTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mSwitchTimer.isChecked()) {
+                    Log.d(TAG, "timer switch is on");
+                    GeneralUtil.clearTextViewInfo(MainActivity.this, mTxtDebug2);
+                    updateDebugLog1("Timer is started.");
+                    mTimer1.start();
+                } else {
+                    Log.d(TAG, "timer switch is off");
+                    GeneralUtil.clearTextViewInfo(MainActivity.this, mTxtDebug2);
+                    mTimer1.cancel();
+                    //doTimerDoneTask();
+                    updateDebugLog1("Timer is cancelled.");
+                }
+            }
+        });
+    }
+
+    // initialize:
     private void init() {
         StringBuilder sb = new StringBuilder("");
 
@@ -277,39 +307,11 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void updateDebugLog1(final String inStr) {
-        if (mTxtDebug1 == null) {
-            return;
-        }
-
-        // always update new log on top:
-        String existingStr = (String) mTxtDebug1.getText();     // cache
-        mSb = new StringBuilder("");
-        mSb.append("\n").append(inStr).append("\n\n").append(existingStr);
-
-        // Update UI:
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mTxtDebug1.setText(mSb.toString());
-            }
-        });
+        GeneralUtil.appendTextViewInfo(MainActivity.this, mTxtDebug1, inStr);
     }
 
     private void updateDebugLog2(final String inStr) {
-        if (mTxtDebug2 == null) {
-            return;
-        }
-        String existingStr = (String) mTxtDebug2.getText();
-        mSb = new StringBuilder("");
-        mSb.append("\n").append(inStr).append("\n").append(existingStr);
-
-        // Update UI:
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mTxtDebug2.setText(mSb.toString());
-            }
-        });
+        GeneralUtil.appendTextViewInfo(MainActivity.this, mTxtDebug2, inStr);
     }
 
     /**
@@ -361,4 +363,58 @@ public class MainActivity extends AppCompatActivity implements
     public void OnFragmentInteractionListenerSharedPrefs(Uri uri) {
         // do nothing
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        int action = ev.getAction() & MotionEvent.ACTION_MASK;
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                if (!GeneralUtil.checkClickValidate()) {
+                    Log.v(TAG, "click too fast, ignore");
+                    Toast.makeText(getApplicationContext(), "Please click slowly.", Toast.LENGTH_LONG)
+                            .show();
+                    return false;
+                }
+                break;
+            default:
+                break;
+        }
+
+        return super.dispatchTouchEvent(ev);
+    }
+
+
+    class MiniGestureDetector extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2,
+                               float velocityX, float velocityY) {
+            try {
+                if (Math.abs(e1.getY() - e2.getY()) > Constants.SWIPE_MAX_OFF_PATH){
+                    return false;
+                }
+                // right to left swipe
+                if (e1.getX() - e2.getX() > Constants.SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > Constants.SWIPE_THRESHOLD_VELOCITY) {
+                    onLeftSwipe();
+                }
+                // left to right swipe
+                else if (e2.getX() - e1.getX() > Constants.SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > Constants.SWIPE_THRESHOLD_VELOCITY) {
+                    onRightSwipe();
+                }
+            } catch (Exception e) {
+
+            }
+            return false;
+        }
+    }
+
+    private void onLeftSwipe() {
+        Log.d(TAG, "swipe left...");
+    }
+
+    private void onRightSwipe() {
+        Log.d(TAG, "swipe right...");
+    }
+
 }

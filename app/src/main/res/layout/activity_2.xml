@@ -75,16 +75,18 @@
                             android:clickable="true" />
 
                         <Button
+                            android:id="@+id/clear_info_1_act2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tbd"
+                            android:text="@string/clear_info_label"
                             android:textStyle="bold"
                             android:clickable="true" />
 
                         <Button
+                            android:id="@+id/click_speed_test_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tbd"
+                            android:text="@string/click_test_label"
                             android:textStyle="bold"
                             android:clickable="true" />
 

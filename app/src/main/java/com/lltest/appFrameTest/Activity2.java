@@ -5,9 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.lltest.util.GeneralUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Activity2 extends AppCompatActivity {
 
@@ -19,20 +26,59 @@ public class Activity2 extends AppCompatActivity {
     private StringBuilder mSb;
 
     private Button mAct1;
+    private Button mBtnClickTest;
+    private Button mBtnClearInfo;
+
     private TextView mTxtDebug1;
     private TextView mTxtDebug2;
+    private List<TextView> mTxtViewList;
 
+    // deep link test:
+    /*
+    private Uri mIntentData;
+    private String mIntentScheme;
+    private String mIntentHost;
+    private String mIntentPath;
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
 
+        Log.v(TAG, "Activity2 onCreate()");
+
+        /*
+        Intent intent = getIntent();
+        if (intent != null) {
+            Log.v(TAG, "intent.getData(): " + String.valueOf(intent.getData()));
+            mIntentData = intent.getData();
+            if (null != mIntentData) {
+                Log.w(TAG, "fetch info from intent data.");
+                mIntentScheme = mIntentData.getScheme();
+                Log.w(TAG, "mIntentScheme: " + mIntentScheme);
+                mIntentHost = mIntentData.getHost();
+                Log.w(TAG, "mIntentHost: " + mIntentHost);
+                mIntentPath = mIntentData.getPath();
+                Log.w(TAG, "mIntentPath: " + mIntentPath);
+            } else {
+                Log.w(TAG, "null data from intent.");
+            }
+        }
+        */
+
         mContext = this;
 
         // UI components linking:
         mAct1 = (Button) findViewById(R.id.act1_btn);
+        mBtnClickTest = (Button) findViewById(R.id.click_speed_test_btn);
+        mBtnClearInfo = (Button) findViewById(R.id.clear_info_1_act2);
+
         mTxtDebug1 = (TextView) findViewById(R.id.txt_debug_2_1);
         mTxtDebug2 = (TextView) findViewById(R.id.txt_debug_2_2);
+        mTxtViewList = new ArrayList<>();
+        mTxtViewList.add(mTxtDebug1);
+        mTxtViewList.add(mTxtDebug2);
+
 
         mAct1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,11 +88,29 @@ public class Activity2 extends AppCompatActivity {
             }
         });
 
+        // click test button:
+        mBtnClickTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "click test btn is clicked");
+                updateDebugLog1("Button is clicked...");
+            }
+        });
+
+        // clear info button:
+        mBtnClearInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "clear info btn is clicked");
+                GeneralUtil.clearMultiTextViewInfo(Activity2.this, mTxtViewList);
+            }
+        });
+
         init();
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume()");
 
@@ -69,42 +133,33 @@ public class Activity2 extends AppCompatActivity {
         Bundle receiveBundle = this.getIntent().getExtras();    // get the bundle from the intent that starts this activity.
         final String infoFromAct1 = receiveBundle.getString(MainActivity.ACT_1_INFO_KEY);
 
+        // update info to log 1:
         updateDebugLog1(infoFromAct1);
     }
 
     private void updateDebugLog1(final String inStr) {
-        if (mTxtDebug1 == null) {
-            return;
-        }
-
-        // always update new log on top:
-        String existingStr = (String) mTxtDebug1.getText();     // cache
-        mSb = new StringBuilder("");
-        mSb.append("\n").append(inStr).append("\n\n").append(existingStr);
-
-        // Update UI:
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mTxtDebug1.setText(mSb.toString());
-            }
-        });
+        GeneralUtil.appendTextViewInfo(Activity2.this, mTxtDebug1, inStr);
     }
 
     private void updateDebugLog2(final String inStr) {
-        if (mTxtDebug2 == null) {
-            return;
-        }
-        String existingStr = (String) mTxtDebug2.getText();
-        mSb = new StringBuilder("");
-        mSb.append("\n").append(inStr).append("\n").append(existingStr);
+        GeneralUtil.appendTextViewInfo(Activity2.this, mTxtDebug2, inStr);
+    }
 
-        // Update UI:
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mTxtDebug2.setText(mSb.toString());
-            }
-        });
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        int action = ev.getAction() & MotionEvent.ACTION_MASK;
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                if (!GeneralUtil.checkClickValidate()) {
+                    Log.v(TAG, "click too fast, ignore");
+                    Toast.makeText(getApplicationContext(), "Please click slowly.", Toast.LENGTH_SHORT)
+                            .show();
+                    return false;
+                }
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }
