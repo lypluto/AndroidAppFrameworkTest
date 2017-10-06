@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -26,7 +27,10 @@ public class GeneralUtil {
 
     public static String getAndroidVersion() {
         int buildVer = Build.VERSION.SDK_INT;
+        Log.i(TAG, "buildVer: " + buildVer);
         switch(buildVer) {
+            case Build.VERSION_CODES.N_MR1:
+                return "N_MR1";
             case Build.VERSION_CODES.N:
                 return "N";
             case Build.VERSION_CODES.M:
