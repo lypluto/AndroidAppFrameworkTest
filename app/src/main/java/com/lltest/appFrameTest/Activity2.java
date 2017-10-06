@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lltest.common.CommonClass;
 import com.lltest.util.GeneralUtil;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class Activity2 extends AppCompatActivity {
     private TextView mTxtDebug1;
     private TextView mTxtDebug2;
     private List<TextView> mTxtViewList;
+
+    private CommonClass myClass;
 
     // deep link test:
     /*

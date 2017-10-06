@@ -120,9 +120,10 @@
                             android:clickable="true" />
 
                         <Button
+                            android:id="@+id/btnWifiTest"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tbd"
+                            android:text="@string/wifi_test_label"
                             android:textStyle="bold"
                             android:clickable="true" />
 

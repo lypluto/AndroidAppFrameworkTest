@@ -50,4 +50,6 @@
     <string name="saved_high_score_default">saved_high_score_default</string>
     <string name="saved_high_score">saved_high_score</string>
 
+    <string name="wifi_test_label">Wifi Test</string>
+
 </resources>
