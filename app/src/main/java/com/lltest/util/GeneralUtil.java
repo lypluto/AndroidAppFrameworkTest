@@ -13,6 +13,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Locale;
@@ -201,7 +202,8 @@ public class GeneralUtil {
      * @param ctx
      * @param logView
      */
-    public static void appendTextViewInfo(Context ctx, final TextView logView, final String inStr) {
+    public static void appendTextViewInfo(final Context ctx, final TextView logView, final String
+            inStr) {
         if (null == logView) {
             Log.e(TAG, "invalid TextView input!");
             return;
@@ -219,6 +221,47 @@ public class GeneralUtil {
                 sb = new StringBuilder("");
                 sb.append("\n").append(inStr).append("\n\n").append(existingStr);
                 logView.setText(sb.toString());
+            }
+        });
+    }
+
+    /**
+     * This method is used to display long toast message.
+     *
+     * @param ctx
+     * @param info
+     */
+    public static void showLongToast(final Context ctx, final String info) {
+        if (null == ctx || !(ctx instanceof Activity)) {
+            Log.e(TAG, "invalid context input!");
+            return;
+        }
+        // Update UI:
+        ((Activity) ctx).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ctx.getApplicationContext(), info, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+
+    /**
+     * This method is used to display short toast message.
+     *
+     * @param ctx
+     * @param info
+     */
+    public static void showShortToast(final Context ctx, final String info) {
+        if (null == ctx || !(ctx instanceof Activity)) {
+            Log.e(TAG, "invalid context input!");
+            return;
+        }
+        // Update UI:
+        ((Activity) ctx).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ctx.getApplicationContext(), info, Toast.LENGTH_SHORT).show();
             }
         });
     }

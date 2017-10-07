@@ -24,7 +24,12 @@ import android.widget.Toast;
 
 import com.lltest.util.Constants;
 import com.lltest.util.GeneralUtil;
+import com.lltest.util.NetworkStatusReceiver;
+import com.lltest.util.NetworkUtil;
+import com.lltest.util.ReminderConstants;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainActivity extends AppCompatActivity implements
@@ -43,8 +48,10 @@ public class MainActivity extends AppCompatActivity implements
     // UI components variables:
     private View mRootView;
     private Button mBtnF1, mBtnF2, mBtnActivity2, mBtnSubAct3, mBtnSharedPrefsTest, mBtnWifiTest;
+    private Button mBtnClearInfo;
     private Switch mSwitchTimer;
     private TextView mTxtDebug1, mTxtDebug2;
+    private List<TextView> mTxtViewList;
 
     // count down timer test variables:
     private CountDownTimer mTimer1;
@@ -78,19 +85,17 @@ public class MainActivity extends AppCompatActivity implements
                 String ssid = wifiInfo.getSSID();
                 Log.d(TAG, "LL: ssid " + ssid);
 
-                int numberOfLevels = 1000;
+                int numberOfLevels = ReminderConstants.WIFI_STRENGTH_RANGE;
                 int level = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
                 Log.d(TAG, "LL: level " + level);
 
-                Toast.makeText(getApplicationContext(), "ssid: " + ssid + ", level: " + level, Toast
-                        .LENGTH_LONG)
-                        .show();
+                GeneralUtil.showShortToast(context, "ssid: " + ssid + ", level: " + level);
 
                 // ssid example: "S-B2B-LAB1", "S-B2B-LAB2"
             } else if (info != null && !info.isConnected()) {
                 Log.d(TAG, "LL: isConnected " + info.isConnected());
-                Toast.makeText(getApplicationContext(), "wifi disconnected!", Toast.LENGTH_LONG)
-                        .show();
+
+                GeneralUtil.showShortToast(context, "wifi disconnected!");
             }
         }
     }
@@ -102,15 +107,14 @@ public class MainActivity extends AppCompatActivity implements
             int newRssi = intent.getIntExtra(WifiManager.EXTRA_NEW_RSSI, 0);
             Log.d(TAG, "newRssi: " + newRssi);
             //updateDebugLog1(String.valueOf(newRssi));
-
-
-            String wifiSsid = getWifiSSID();
-            int wifiLevel = getWifiStrengthLevel();
+            String wifiSsid = NetworkUtil.getWifiSSID(MainActivity.this);
+            int wifiLevel = NetworkUtil.getWifiStrengthLevel(MainActivity.this);
 
             StringBuilder sb = new StringBuilder();
             sb.append("WIFI SSID: ").append(wifiSsid).append("\n").append("WIFI STRENGTH: ")
                     .append(String.valueOf(wifiLevel));
             updateDebugLog1(sb.toString());
+            GeneralUtil.showShortToast(ctx, sb.toString());
         }};
 
 
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements
 
         mRootView = findViewById(R.id.activity_main);
 
-        Log.d(TAG, "LL: MainActivity onCreate()");
+        Log.d(TAG, "MainActivity onCreate()");
 
         // In OnCreate or custome view constructor (which extends one of Android views)
         //detector = new GestureDetectorCompat(getApplicationContext(), gestureDetector);
@@ -147,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "LL: try to unregister mWifiReceiver.");
+        Log.d(TAG, "unregister broadcast receivers.");
         unregisterReceiver(mWifiReceiver);
         unregisterReceiver(myRssiChangeReceiver);
     }
@@ -243,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements
      *
      */
     private void initUI() {
+        mBtnClearInfo = (Button) findViewById(R.id.btn_clear_info_1_act1);
         mBtnF1 = (Button) findViewById(R.id.f1_btn);
         mBtnF2 = (Button) findViewById(R.id.f2_btn);
         mBtnActivity2 = (Button) findViewById(R.id.act2_btn);
@@ -254,8 +259,18 @@ public class MainActivity extends AppCompatActivity implements
 
         mTxtDebug1 = (TextView) findViewById(R.id.txt_debug_1);
         mTxtDebug2 = (TextView) findViewById(R.id.txt_debug_2);
+        mTxtViewList = new ArrayList<>();
+        mTxtViewList.add(mTxtDebug1);
+        mTxtViewList.add(mTxtDebug2);
 
-
+        // clear info button:
+        mBtnClearInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "clear info btn is clicked");
+                GeneralUtil.clearMultiTextViewInfo(MainActivity.this, mTxtViewList);
+            }
+        });
 
         mBtnF1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,8 +316,8 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "mBtnWifiTest is clicked");
-                String wifiSsid = getWifiSSID();
-                int wifiLevel = getWifiStrengthLevel();
+                String wifiSsid = NetworkUtil.getWifiSSID(MainActivity.this);
+                int wifiLevel = NetworkUtil.getWifiStrengthLevel(MainActivity.this);
 
                 StringBuilder sb = new StringBuilder();
                 sb.append("WIFI SSID: ").append(wifiSsid).append("\n").append("WIFI STRENGTH: ")
@@ -351,21 +366,11 @@ public class MainActivity extends AppCompatActivity implements
     // initialize:
     private void init() {
 
-        IntentFilter intentFilter = new IntentFilter();
-        //intentFilter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
-        intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-        registerReceiver(mWifiReceiver, intentFilter);
-
-        /*
-        IntentFilter intentFilter2 = new IntentFilter();
-        //intentFilter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
-        intentFilter2.addAction(WifiManager.RSSI_CHANGED_ACTION);
-        registerReceiver(mWifiReceiver, intentFilter2);
-        */
-
+        // register broadcast receivers:
+        this.registerReceiver(this.mWifiReceiver,
+                new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION));
         this.registerReceiver(this.myRssiChangeReceiver,
                 new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
-
 
         StringBuilder sb = new StringBuilder("");
 
@@ -514,25 +519,5 @@ public class MainActivity extends AppCompatActivity implements
     private void onRightSwipe() {
         Log.d(TAG, "swipe right...");
     }
-
-    private String getWifiSSID() {
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context
-                .WIFI_SERVICE);
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        String ssid = wifiInfo.getSSID();
-        Log.v(TAG, "wifi SSID: " + ssid);
-        return ssid;
-    }
-
-    private int getWifiStrengthLevel() {
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context
-                .WIFI_SERVICE);
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        int numberOfLevels = 1000;
-        int level = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
-        Log.v(TAG, "wifi level: " + level);
-        return level;
-    }
-
 
 }

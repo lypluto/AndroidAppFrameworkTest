@@ -70,6 +70,14 @@
                         android:showDividers="middle" >
 
                         <Button
+                            android:id="@+id/btn_clear_info_1_act1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/clear_info_label"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
                             android:id="@+id/f1_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -124,13 +132,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/wifi_test_label"
-                            android:textStyle="bold"
-                            android:clickable="true" />
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tbd"
                             android:textStyle="bold"
                             android:clickable="true" />
 
