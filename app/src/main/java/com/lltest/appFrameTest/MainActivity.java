@@ -77,25 +77,25 @@ public class MainActivity extends AppCompatActivity implements
             NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
             if (info != null && info.isConnected()) {
                 // Do your work.
-                Log.d(TAG, "LL: isConnected " + info.isConnected());
+                Log.d(TAG, "isConnected " + info.isConnected());
 
                 // e.g. To check the Network Name or other info:
                 WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                 String ssid = wifiInfo.getSSID();
-                Log.d(TAG, "LL: ssid " + ssid);
+                Log.d(TAG, "ssid " + ssid);
 
                 int numberOfLevels = ReminderConstants.WIFI_STRENGTH_RANGE;
                 int level = WifiManager.calculateSignalLevel(wifiInfo.getRssi(), numberOfLevels);
-                Log.d(TAG, "LL: level " + level);
-
-                GeneralUtil.showShortToast(context, "ssid: " + ssid + ", level: " + level);
+                Log.d(TAG, "level " + level);
+                updateDebugLog1("ssid: " + ssid + ", level: " + level);
+                //GeneralUtil.showShortToast(context, "ssid: " + ssid + ", level: " + level);
 
                 // ssid example: "S-B2B-LAB1", "S-B2B-LAB2"
             } else if (info != null && !info.isConnected()) {
-                Log.d(TAG, "LL: isConnected " + info.isConnected());
-
-                GeneralUtil.showShortToast(context, "wifi disconnected!");
+                Log.d(TAG, "isConnected " + info.isConnected());
+                updateDebugLog1("WIFI disconnected!");
+                //GeneralUtil.showShortToast(context, "wifi disconnected!");
             }
         }
     }
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements
             sb.append("WIFI SSID: ").append(wifiSsid).append("\n").append("WIFI STRENGTH: ")
                     .append(String.valueOf(wifiLevel));
             updateDebugLog1(sb.toString());
-            GeneralUtil.showShortToast(ctx, sb.toString());
+            //GeneralUtil.showShortToast(ctx, sb.toString());
         }};
 
 
@@ -467,6 +467,22 @@ public class MainActivity extends AppCompatActivity implements
         // do nothing
     }
 
+    /**
+     * Callback detects full/half screen mode change event.
+     *
+     * @param isInMultiWindowMode
+     */
+    @Override
+    public void onMultiWindowModeChanged (boolean isInMultiWindowMode) {
+        super.onMultiWindowModeChanged(isInMultiWindowMode);
+        Log.v(TAG, "onMultiWindowModeChanged: " + isInMultiWindowMode);
+        if (isInMultiWindowMode) {
+            GeneralUtil.showLongToast(MainActivity.this, "Multiple Window Mode");
+        } else {
+            GeneralUtil.showLongToast(MainActivity.this, "Full Screen Mode");
+        }
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         int action = ev.getAction() & MotionEvent.ACTION_MASK;
@@ -474,8 +490,7 @@ public class MainActivity extends AppCompatActivity implements
             case MotionEvent.ACTION_DOWN:
                 if (!GeneralUtil.checkClickValidate()) {
                     Log.v(TAG, "click too fast, ignore");
-                    Toast.makeText(getApplicationContext(), "Please click slowly.", Toast.LENGTH_LONG)
-                            .show();
+                    GeneralUtil.showLongToast(MainActivity.this, "Please click slowly.");
                     return false;
                 }
                 break;
@@ -519,5 +534,7 @@ public class MainActivity extends AppCompatActivity implements
     private void onRightSwipe() {
         Log.d(TAG, "swipe right...");
     }
+
+
 
 }
