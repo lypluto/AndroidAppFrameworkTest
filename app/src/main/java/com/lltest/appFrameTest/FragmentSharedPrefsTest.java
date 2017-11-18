@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.lltest.util.Constants;
+
 import static com.lltest.util.GeneralUtil.showMessage;
 
 /**
@@ -24,7 +26,7 @@ import static com.lltest.util.GeneralUtil.showMessage;
  * create an instance of this fragment.
  */
 public class FragmentSharedPrefsTest extends Fragment implements View.OnClickListener {
-    static private final String TAG = "FragmentSharedPrefsTest";
+    static private final String TAG = Constants.APP_PREFIX + "FragmentSharedPrefsTest";
 
     private OnFragmentInteractionListenerSharedPrefs mListener;
     private SharedPreferences mSharedPref;

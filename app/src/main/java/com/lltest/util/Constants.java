@@ -6,6 +6,8 @@ package com.lltest.util;
 
 public class Constants {
 
+    public static final String APP_PREFIX = "AppFwTest_";
+
     public static final String FRAGMENT_ONE_TAG = "fragment_one";
     public static final String FRAGMENT_TWO_TAG = "fragment_two";
     public static final String FRAGMENT_SHARED_PREFS_TAG = "fragment_shared_prefs_test";

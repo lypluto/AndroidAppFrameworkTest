@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.lltest.db.StudentData;
 import com.lltest.db.StudentDbManager;
+import com.lltest.util.Constants;
 import com.lltest.util.GeneralUtil;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import static com.lltest.util.GeneralUtil.showMessage;
  *
  */
 public class Activity3 extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "Activity3";
+    private static final String TAG = Constants.APP_PREFIX + "Activity3";
     public static final String ACT_3_RESULT_BUNDLE = "resultBundleFrom3";
     public static final String ACT_3_RESULT_STR = "resultStrFrom3";
 

@@ -1,0 +1,20 @@
+<manifest package="com.lltest.androidtestlibrary"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application android:allowBackup="true" android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <service
+            android:name="com.lltest.androidtestlibrary.TimeService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.lltest.timeservice.CHECK_TIME_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>
