@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements
         FragmentTwo.OnFragmentInteractionListener2,
         FragmentSharedPrefsTest.OnFragmentInteractionListenerSharedPrefs {
 
-    static private final String TAG = "MainActivity";
+    static private final String TAG = Constants.APP_PREFIX + "MainActivity";
 
 
     private final String LOAD_STR = "Loading...";
@@ -483,6 +484,13 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Check click validation in dispatchTouchEvent,
+     * so that too fast click events can be avoided.
+     *
+     * @param ev
+     * @return
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         int action = ev.getAction() & MotionEvent.ACTION_MASK;

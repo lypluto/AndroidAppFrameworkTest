@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class GeneralUtil {
 
-    private static final String TAG = "GeneralUtil";
+    private static final String TAG = Constants.APP_PREFIX + "GeneralUtil";
 
     public static String getAndroidVersion() {
         int buildVer = Build.VERSION.SDK_INT;

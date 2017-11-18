@@ -10,9 +10,14 @@
     <string name="go_to_activity1">Activity 1</string>
     <string name="go_to_activity2">Activity 2</string>
     <string name="start_sub_act_3">Sub Activity 3</string>
-    <string name="timer">Timer Test</string>
     <string name="click_test_label">Click Test</string>
     <string name="clear_info_label">Clear Info</string>
+    <string name="show_time_label">Show Time</string>
+    <string name="kill_time_label">Kill Time</string>
+
+    <!-- switch labels -->
+    <string name="timer">Timer Test</string>
+    <string name="time_service_label">Time Service</string>
 
     <!-- Texts -->
     <string name="tbd">TBD</string>

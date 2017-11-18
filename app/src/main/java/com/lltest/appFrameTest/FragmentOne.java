@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.lltest.util.Constants;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -21,7 +23,7 @@ import android.widget.Button;
 public class FragmentOne extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
 
-    static private final String TAG = "FragmentOne";
+    static private final String TAG = Constants.APP_PREFIX + "FragmentOne";
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

@@ -90,17 +90,29 @@
                             android:textStyle="bold"
                             android:clickable="true" />
 
-                        <Button
+                        <Switch
+                            android:id="@+id/time_service_switch"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tbd"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:clickable="true"
+                            android:paddingLeft="25dp"
+                            android:text="@string/time_service_label" />
+
+                        <Button
+                            android:id="@+id/show_time_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/show_time_label"
                             android:textStyle="bold"
                             android:clickable="true" />
 
                         <Button
+                            android:id="@+id/kill_time_service_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tbd"
+                            android:text="@string/kill_time_label"
                             android:textStyle="bold"
                             android:clickable="true" />
 

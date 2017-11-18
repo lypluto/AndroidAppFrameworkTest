@@ -10,7 +10,7 @@ import android.util.Log;
  */
 
 public class NetworkUtil {
-    private static final String TAG = "NetworkUtil";
+    private static final String TAG = Constants.APP_PREFIX + "NetworkUtil";
 
     public static String getWifiSSID(final Context ctx) {
         WifiManager wifiManager = (WifiManager) ctx.getApplicationContext().getSystemService(Context

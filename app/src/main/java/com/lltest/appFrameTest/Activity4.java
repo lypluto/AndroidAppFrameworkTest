@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lltest.util.Constants;
 import com.lltest.util.GeneralUtil;
 
 import java.util.Set;
@@ -20,7 +21,7 @@ import java.util.Set;
 
 public class Activity4 extends Activity2 {
 
-    static private final String TAG = "Activity4";
+    static private final String TAG = Constants.APP_PREFIX + "Activity4";
 
     private Uri mIntentData;
     private String mIntentScheme;

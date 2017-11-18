@@ -16,7 +16,7 @@ import com.lltest.appFrameTest.MainActivity;
  */
 
 public class NetworkStatusReceiver extends BroadcastReceiver {
-    private static final String TAG = "NetworkStatusReceiver";
+    private static final String TAG = Constants.APP_PREFIX + "NetworkStatusReceiver";
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: impl
