@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidAppFrameworkTest.iml" filepath="$PROJECT_DIR$/AndroidAppFrameworkTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidAppFrameworkTest.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidAppFrameworkTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidtestlibrary/androidtestlibrary.iml" filepath="$PROJECT_DIR$/androidtestlibrary/androidtestlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
     </modules>
   </component>
 </project>
