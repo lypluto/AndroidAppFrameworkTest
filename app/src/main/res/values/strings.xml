@@ -57,4 +57,11 @@
 
     <string name="wifi_test_label">Wifi Test</string>
 
+    <!-- WebView test labels -->
+    <string name="webViewTestLabel">WebView Test Page</string>
+    <string name="webViewLoadUrlSwitch">Load URL</string>
+    <string name="url_label">URL: </string>
+    <string name="default_url">https://lypluto.github.io/tinyWebTest/</string>
+    <string name="url_dialog">URL Dialog</string>
+
 </resources>

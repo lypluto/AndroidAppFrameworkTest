@@ -1,7 +1,9 @@
 package com.lltest.appFrameTest;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import com.lltest.util.Constants;
@@ -79,34 +83,7 @@ public class FragmentTwo extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_two, container, false);
         mView = inflater.inflate(R.layout.fragment_two, container, false);
-
-        mBtnClose = (Button) mView.findViewById(R.id.two_close_btn);
-        mBtnF1 = (Button) mView.findViewById(R.id.two_f1_btn);
-
-        mBtnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnClose is clicked");
-                //getActivity().onBackPressed();  // this will cause the entire app goes to backend, not goes to activity page.
-
-                //getActivity().getFragmentManager().popBackStack();
-
-                unloadMyself();
-
-            }
-        });
-
-        mBtnF1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnF1 is clicked");
-
-                // start fragment 1, and then close current fragment:
-                loadFragmentOne();
-                unloadMyself();     // if do not remove current fragment, then new fragment 1 will be on top of fragment 2.
-            }
-        });
-
+        initUI();
         return mView;
     }
 
@@ -186,5 +163,35 @@ public class FragmentTwo extends Fragment {
                 .remove(this)
                 .addToBackStack(null)
                 .commitAllowingStateLoss();
+    }
+
+    private void initUI() {
+        mBtnClose = (Button) mView.findViewById(R.id.two_close_btn);
+        mBtnF1 = (Button) mView.findViewById(R.id.two_f1_btn);
+
+        mBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnClose is clicked");
+                //getActivity().onBackPressed();  // this will cause the entire app goes to backend, not goes to activity page.
+
+                //getActivity().getFragmentManager().popBackStack();
+
+                unloadMyself();
+
+            }
+        });
+
+        mBtnF1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnF1 is clicked");
+
+                // start fragment 1, and then close current fragment:
+                loadFragmentOne();
+                unloadMyself();     // if do not remove current fragment, then new fragment 1
+                // will be on top of fragment 2.
+            }
+        });
     }
 }
