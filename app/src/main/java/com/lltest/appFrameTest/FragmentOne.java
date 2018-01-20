@@ -5,12 +5,22 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.lltest.util.Constants;
+import com.lltest.util.GeneralUtil;
+import com.lltest.util.WebViewUtil;
+import com.lltest.webview.Frag1WebViewClient;
+import com.lltest.webview.Frag1WebViewListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +48,51 @@ public class FragmentOne extends Fragment {
     private View mView;
     private Button mBtnClose;
     private Button mBtnF2;
+    private Button mBtnShowUrlDialog;
+
+    private WebView mWebView;
+    private WebViewClient mWebViewClient;
+    private EditText mUrlEdit;
+
+    private Switch mLoadUrlSwitch;
+
+    private Frag1WebViewListener mWebViewListener = new Frag1WebViewListener() {
+        @Override
+        public void onReceivedError(String url, int errorCode) {
+            Log.d(TAG, "onReceivedError: " + url);
+            //GeneralUtil.showShortToast(getActivity(), "onReceivedError");
+        }
+
+        @Override
+        public void onPageFinished(String url) {
+            Log.d(TAG, "page loading finished: " + url);
+            //GeneralUtil.showShortToast(getActivity(), "onPageFinished");
+        }
+
+        @Override
+        public void onPageStarted(String url) {
+            Log.d(TAG, "page loading started: " + url);
+            //GeneralUtil.showShortToast(getActivity(), "onPageStarted");
+        }
+
+        @Override
+        public void onLoadResource(String url) {
+            Log.d(TAG, "onLoadResource: " + url);
+            //GeneralUtil.showShortToast(getActivity(), "onLoadResource");
+        }
+
+        @Override
+        public void onTokenReady(String token) {
+            Log.d(TAG, "onTokenReady...");
+            //GeneralUtil.showShortToast(getActivity(), "onTokenReady");
+        }
+
+        @Override
+        public void onPinningPrevented(String host) {
+            Log.d(TAG, "onPinningPrevented...");
+            //GeneralUtil.showShortToast(getActivity(), "onPinningPrevented");
+        }
+    };
 
 
     public FragmentOne() {
@@ -86,34 +141,7 @@ public class FragmentOne extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_one, container, false);
         mView = inflater.inflate(R.layout.fragment_one, container, false);
-
-        mBtnClose = (Button) mView.findViewById(R.id.one_close_btn);
-        mBtnF2 = (Button) mView.findViewById(R.id.one_f2_btn);
-
-        mBtnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnClose is clicked");
-                //getActivity().onBackPressed();  // this will cause the entire app goes to backend, not goes to activity page.
-
-                //getActivity().getFragmentManager().popBackStack();
-
-                unloadMyself();
-
-            }
-        });
-
-        mBtnF2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "mBtnF2 is clicked");
-
-                // start fragment 2, then remove fragment 1:
-                loadFragmentTwo();
-                unloadMyself();
-            }
-        });
-
+        initUI();
         return mView;
     }
 
@@ -198,6 +226,107 @@ public class FragmentOne extends Fragment {
                 .remove(this)
                 .addToBackStack(null)
                 .commitAllowingStateLoss();
+    }
+
+
+    // Update UI:
+    private void initUI() {
+
+        mUrlEdit = (EditText) mView.findViewById(R.id.url_edit);
+
+        mLoadUrlSwitch = (Switch) mView.findViewById(R.id.load_url_switch);
+        mLoadUrlSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mLoadUrlSwitch.isChecked()) {
+                    Log.d(TAG, "load URL.");
+                    if (null != mWebView && null != mUrlEdit) {
+                        mWebView.clearView();
+                        mWebView.loadUrl(mUrlEdit.getText().toString());
+                    }
+                } else {
+                    Log.d(TAG, "load blank URL.");
+                    if (null != mWebView) {
+                        mWebView.clearView();
+                        mWebView.loadUrl("about:blank");
+                    }
+                }
+            }
+        });
+
+        mWebView = (WebView) mView.findViewById(R.id.webview);
+        mWebView.getSettings().setJavaScriptEnabled(true);  // TODO: need this?
+        mWebViewClient = new Frag1WebViewClient(getContext(), mWebViewListener);
+        mWebView.setWebViewClient(mWebViewClient);
+
+        // handle WebView go back operation:
+        mWebView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //This is the filter
+                if (event.getAction() != KeyEvent.ACTION_DOWN)
+                    return true;
+
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if (mWebView != null && mWebView.canGoBack()) {
+                        mWebView.goBack();
+                    } else {
+                        Log.d(TAG, "WebView cannot go back. Trigger activity onBackPressed");
+                        (getActivity()).onBackPressed();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
+        mBtnClose = (Button) mView.findViewById(R.id.one_close_btn);
+        mBtnF2 = (Button) mView.findViewById(R.id.one_f2_btn);
+
+        mBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnClose is clicked");
+                //getActivity().onBackPressed();  // this will cause the entire app goes to backend, not goes to activity page.
+
+                //getActivity().getFragmentManager().popBackStack();
+
+                unloadMyself();
+
+            }
+        });
+
+        mBtnF2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnF2 is clicked");
+
+                // start fragment 2, then remove fragment 1:
+                loadFragmentTwo();
+                unloadMyself();
+            }
+        });
+
+        mBtnShowUrlDialog = (Button) mView.findViewById(R.id.url_dialog_btn);
+        mBtnShowUrlDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnClose is clicked");
+                String url = (mUrlEdit != null) ?
+                        mUrlEdit.getText().toString() : "http://www.google.com/";
+                WebViewUtil.showUrlDialog(getContext(), url, new WebViewClient() {
+                    @Override
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        view.loadUrl(url);
+                        return true;
+                    }
+                });
+
+            }
+        });
+
     }
 
 }
