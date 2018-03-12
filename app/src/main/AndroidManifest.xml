@@ -104,6 +104,8 @@
             android:theme="@android:style/Theme.NoDisplay"
             android:autoRemoveFromRecents="true"/>
 
+
+
     </application>
 
 </manifest>

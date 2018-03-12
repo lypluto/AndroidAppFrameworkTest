@@ -9,6 +9,8 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -169,6 +171,7 @@ public class FragmentOne extends Fragment {
 
     @Override
     public void onDetach() {
+        Log.d(TAG, "onDetach()");
         super.onDetach();
         mListener = null;
 
@@ -176,6 +179,7 @@ public class FragmentOne extends Fragment {
 
     @Override
     public void onResume() {
+        Log.d(TAG, "onResume()");
         super.onResume();
         Log.d(TAG, "onResume, reset fragment lock to false.");
         ((MainActivity)getActivity()).setFragmentLock(false);
@@ -183,6 +187,7 @@ public class FragmentOne extends Fragment {
 
     @Override
     public void onPause() {
+        Log.d(TAG, "onPause()");
         super.onPause();
         /*
         Log.d(TAG, "onPause, reset fragment lock to false.");
@@ -259,6 +264,16 @@ public class FragmentOne extends Fragment {
         mWebViewClient = new Frag1WebViewClient(getContext(), mWebViewListener);
         mWebView.setWebViewClient(mWebViewClient);
 
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setSupportZoom(true);
+        webSettings.setDefaultTextEncodingName("utf-8");
+
         // handle WebView go back operation:
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -313,7 +328,7 @@ public class FragmentOne extends Fragment {
         mBtnShowUrlDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "mBtnClose is clicked");
+                Log.d(TAG, "mBtnShowUrlDialog is clicked");
                 String url = (mUrlEdit != null) ?
                         mUrlEdit.getText().toString() : "http://www.google.com/";
                 WebViewUtil.showUrlDialog(getContext(), url, new WebViewClient() {
@@ -323,7 +338,6 @@ public class FragmentOne extends Fragment {
                         return true;
                     }
                 });
-
             }
         });
 

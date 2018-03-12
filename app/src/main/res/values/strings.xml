@@ -24,6 +24,8 @@
     <string name="info">Information</string>
     <string name="opt">Operations</string>
     <string name="others">Other Info</string>
+    <string name="frag1_label">Fragment 01</string>
+    <string name="frag2_label">Fragment 02</string>
 
     <string name="debug_log_1">debug log 1</string>
     <string name="debug_log_2">debug log 2</string>

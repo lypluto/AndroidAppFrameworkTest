@@ -12,6 +12,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -404,7 +405,21 @@ public class MainActivity extends AppCompatActivity implements
 
         }
         String isRtlStr = (isRtl) ? "Yes" : "No";
-        sb.append("Is Right to Left? ").append(isRtlStr);
+        sb.append("Is Right to Left? ").append(isRtlStr).append("\n");
+
+        // [4] logic checking is one-handed mode enabled or not:
+        try {
+            int oneHandFlag = Settings.System.getInt(getContentResolver(), Settings.System
+                    .SEM_ONE_HAND_ANY_SCREEN_RUNNING);
+            Log.d(TAG, "one-hand mode flag: " + oneHandFlag);
+            if (oneHandFlag == 1) {
+                sb.append("One-hand mode? ").append("YES").append("\n");
+            } else {
+                sb.append("One-hand mode? ").append("NO").append("\n");
+            }
+        } catch (Settings.SettingNotFoundException e) {
+            Log.e(TAG, "NO one-hand mode setting!");
+        }
 
         // UPDATE INFO 1:
         updateDebugLog1(sb.toString());
