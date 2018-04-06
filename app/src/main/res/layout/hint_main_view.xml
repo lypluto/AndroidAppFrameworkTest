@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hint_main_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:focusable="false"
+    android:orientation="vertical">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linear_layout_hint_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/hint_layout_background"
+        android:orientation="vertical"
+        android:paddingBottom="11dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingTop="11dp">
+
+        <TextView
+            android:id="@+id/txt_dialog_msg"
+            android:gravity="center"
+            android:minHeight="16dp"
+            android:minWidth="197dp"
+            android:textSize="12sp"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:lineSpacingMultiplier="1.08"
+            android:text="Fragment 3"
+            android:textColor="#FFFFFFFF" />
+
+        <TextView
+            android:id="@+id/txt_dialog_msg_sub"
+            android:gravity="center"
+            android:minHeight="16dp"
+            android:minWidth="197dp"
+            android:textSize="9sp"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:lineSpacingMultiplier="1.44"
+            android:text="Aloha..."
+            android:textColor="#FF9B9B9B" />
+
+        <ImageView
+            android:id="@+id/dialog_imageview"
+            android:layout_width="123dp"
+            android:layout_height="27dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            android:src="@mipmap/test_launcher" />
+
+    </LinearLayout>
+
+</FrameLayout>

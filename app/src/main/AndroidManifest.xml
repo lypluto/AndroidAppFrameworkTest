@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+
+
     <!-- WebView needs INTERNET permission -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -35,6 +38,18 @@
             </intent-filter>
 
         </activity>
+
+        <activity-alias
+            android:name="com.lltest.appFrameTest.MainAliasActivity"
+            android:targetActivity="com.lltest.appFrameTest.MainActivity"
+            android:label="Samples Alias"
+            android:icon="@mipmap/test_launcher"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
 
         <activity android:name="com.lltest.appFrameTest.Activity2">
@@ -98,13 +113,10 @@
 
         </activity>
 
-
         <activity
             android:name="com.lltest.appFrameTest.ExitActivity"
             android:theme="@android:style/Theme.NoDisplay"
             android:autoRemoveFromRecents="true"/>
-
-
 
     </application>
 

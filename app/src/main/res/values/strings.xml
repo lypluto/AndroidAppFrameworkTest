@@ -4,6 +4,7 @@
     <!-- button labels -->
     <string name="go_to_f1">GO TO F1</string>
     <string name="go_to_f2">GO TO F2</string>
+    <string name="go_to_f3">GO TO F3</string>
     <string name="go_home">GO HOME</string>
     <string name="main_activity">Main Activity</string>
     <string name="close_myself">Close Myself</string>
@@ -14,6 +15,8 @@
     <string name="clear_info_label">Clear Info</string>
     <string name="show_time_label">Show Time</string>
     <string name="kill_time_label">Kill Time</string>
+    <string name="do_alias_label">Do Alias</string>
+    <string name="clear_alias_label">Clear Alias</string>
 
     <!-- switch labels -->
     <string name="timer">Timer Test</string>

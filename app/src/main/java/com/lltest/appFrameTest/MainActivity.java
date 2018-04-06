@@ -1,11 +1,14 @@
 package com.lltest.appFrameTest;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Configuration;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
@@ -22,11 +25,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lltest.util.Constants;
 import com.lltest.util.GeneralUtil;
-import com.lltest.util.NetworkStatusReceiver;
 import com.lltest.util.NetworkUtil;
 import com.lltest.util.ReminderConstants;
 
@@ -37,6 +38,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MainActivity extends AppCompatActivity implements
         FragmentOne.OnFragmentInteractionListener,
         FragmentTwo.OnFragmentInteractionListener2,
+        Fragment3.OnFragmentInteractionListener3,
         FragmentSharedPrefsTest.OnFragmentInteractionListenerSharedPrefs {
 
     static private final String TAG = Constants.APP_PREFIX + "MainActivity";
@@ -51,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements
     private View mRootView;
     private Button mBtnF1, mBtnF2, mBtnActivity2, mBtnSubAct3, mBtnSharedPrefsTest, mBtnWifiTest;
     private Button mBtnClearInfo;
+    private Button mBtnF3;
+
+    private Button mBtnDoAlias, mBtnClearAlias;
+
     private Switch mSwitchTimer;
     private TextView mTxtDebug1, mTxtDebug2;
     private List<TextView> mTxtViewList;
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements
     // count down timer test variables:
     private CountDownTimer mTimer1;
     private final int TICK_TIME = 1000;
-    private final int FINISH_TIME = 10000;
+    private final int FINISH_TIME = 5000;   // 5 sec
 
     private StringBuilder mSb;
 
@@ -123,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setTitle("Test App 1");
         setContentView(R.layout.activity_main);
 
         mRootView = findViewById(R.id.activity_main);
@@ -225,6 +232,16 @@ public class MainActivity extends AppCompatActivity implements
         //}
     }
 
+    public void loadFragment3() {
+        Log.v(TAG, "loadFragment3");
+        Fragment3 fragment3;
+        fragment3 = Fragment3.newInstance("arg1", "arg2");
+        getSupportFragmentManager().beginTransaction()
+                //this.getFragmentManager().beginTransaction()
+                .add(android.R.id.content, fragment3, Constants.FRAGMENT_TWO_TAG)
+                .commitAllowingStateLoss();
+    }
+
     public void loadFragmentSharedPrefsTest() {
         Log.v(TAG, "loadFragmentSharedPrefsTest");
         FragmentSharedPrefsTest fragmentSharedPrefs;
@@ -252,10 +269,13 @@ public class MainActivity extends AppCompatActivity implements
         mBtnClearInfo = (Button) findViewById(R.id.btn_clear_info_1_act1);
         mBtnF1 = (Button) findViewById(R.id.f1_btn);
         mBtnF2 = (Button) findViewById(R.id.f2_btn);
+        mBtnF3 = (Button) findViewById(R.id.f3_btn);
         mBtnActivity2 = (Button) findViewById(R.id.act2_btn);
         mBtnSubAct3 = (Button) findViewById(R.id.sub_act3_btn);
         mBtnSharedPrefsTest = (Button) findViewById(R.id.btnSharedPrefsTest);
         mBtnWifiTest = (Button) findViewById(R.id.btnWifiTest);
+        mBtnDoAlias = (Button) findViewById(R.id.btnDoAlias);
+        mBtnClearAlias = (Button) findViewById(R.id.btnClearAlias);
 
         mSwitchTimer = (Switch) findViewById(R.id.timer_switch);
 
@@ -287,6 +307,14 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 Log.d(TAG, "mBtnF2 is clicked");
                 loadFragmentTwo();
+            }
+        });
+
+        mBtnF3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnF3 is clicked");
+                loadFragment3();
             }
         });
 
@@ -325,6 +353,22 @@ public class MainActivity extends AppCompatActivity implements
                 sb.append("WIFI SSID: ").append(wifiSsid).append("\n").append("WIFI STRENGTH: ")
                         .append(String.valueOf(wifiLevel));
                 updateDebugLog1(sb.toString());
+            }
+        });
+
+        mBtnDoAlias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnDoAlias is clicked");
+                doAlias(v);
+            }
+        });
+
+        mBtnClearAlias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnClearAlias is clicked");
+                clearAlias(v);
             }
         });
 
@@ -466,22 +510,7 @@ public class MainActivity extends AppCompatActivity implements
         mFragmentLock.set(lockStatus);
     }
 
-    // impl callbacks declared in fragments:
 
-    @Override
-    public void onFragmentInteraction(String s) {
-        // do nothing
-    }
-
-    @Override
-    public void onFragmentInteraction2(Uri uri) {
-        // do nothing
-    }
-
-    @Override
-    public void OnFragmentInteractionListenerSharedPrefs(Uri uri) {
-        // do nothing
-    }
 
     /**
      * Callback detects full/half screen mode change event.
@@ -522,6 +551,71 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         return super.dispatchTouchEvent(ev);
+    }
+
+    private void doAlias(View v){
+        PackageManager pm = getPackageManager();
+        pm.setComponentEnabledSetting(getComponentName(),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(new ComponentName(this, "com.lltest.appFrameTest.MainAliasActivity"),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
+        GeneralUtil.showShortToast(MainActivity.this, "Please close app.");
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        List<ResolveInfo> resolves = pm.queryIntentActivities(intent, 0);
+        for (ResolveInfo res : resolves) {
+            if (res.activityInfo != null) {
+                ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+                am.killBackgroundProcesses(res.activityInfo.packageName);
+            }
+        }
+    }
+
+    private void clearAlias(View v){
+        PackageManager pm = getPackageManager();
+        pm.setComponentEnabledSetting(getComponentName(),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(new ComponentName(this, "com.lltest.appFrameTest.MainActivity"),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
+        GeneralUtil.showShortToast(MainActivity.this, "Please close app.");
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        List<ResolveInfo> resolves = pm.queryIntentActivities(intent, 0);
+        for (ResolveInfo res : resolves) {
+            if (res.activityInfo != null) {
+                ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+                am.killBackgroundProcesses(res.activityInfo.packageName);
+            }
+        }
+    }
+
+
+    // impl callbacks declared in fragments:
+
+    @Override
+    public void onFragmentInteraction(String s) {
+        // do nothing
+    }
+
+    @Override
+    public void onFragmentInteraction2(Uri uri) {
+        // do nothing
+    }
+
+    @Override
+    public void onFragmentInteraction3(Uri uri) {
+
+    }
+
+    @Override
+    public void OnFragmentInteractionListenerSharedPrefs(Uri uri) {
+        // do nothing
     }
 
 
