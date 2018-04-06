@@ -81,12 +81,28 @@
                             android:clickable="true" />
 
                         <Button
+                            android:id="@+id/act2_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/go_to_activity2"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
                             android:id="@+id/f1_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/go_to_f1"
                             android:textStyle="bold"
                             android:clickable="true" />
+
+                        <Button
+                            android:id="@+id/sub_act3_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:text="@string/db_sub_act"
+                            android:textStyle="bold" />
 
                         <Button
                             android:id="@+id/f2_btn"
@@ -97,10 +113,10 @@
                             android:clickable="true" />
 
                         <Button
-                            android:id="@+id/act2_btn"
+                            android:id="@+id/f3_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/go_to_activity2"
+                            android:text="@string/go_to_f3"
                             android:textStyle="bold"
                             android:clickable="true" />
 
@@ -113,14 +129,6 @@
                             android:clickable="true"
                             android:paddingLeft="25dp"
                             android:text="@string/timer" />
-
-                        <Button
-                            android:id="@+id/sub_act3_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/db_sub_act"
-                            android:textStyle="bold"
-                            android:clickable="true" />
 
                         <Button
                             android:id="@+id/btnSharedPrefsTest"
@@ -139,9 +147,18 @@
                             android:clickable="true" />
 
                         <Button
+                            android:id="@+id/btnDoAlias"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tbd"
+                            android:text="@string/do_alias_label"
+                            android:textStyle="bold"
+                            android:clickable="true" />
+
+                        <Button
+                            android:id="@+id/btnClearAlias"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/clear_alias_label"
                             android:textStyle="bold"
                             android:clickable="true" />
 

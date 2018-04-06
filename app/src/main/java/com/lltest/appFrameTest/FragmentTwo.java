@@ -1,5 +1,6 @@
 package com.lltest.appFrameTest;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.lltest.util.Constants;
 
@@ -44,6 +46,10 @@ public class FragmentTwo extends Fragment {
     private View mView;
     private Button mBtnClose;
     private Button mBtnF1;
+
+    private View mLinearLayout;
+
+    private LinearLayout mDialogView;
 
     public FragmentTwo() {
         // Required empty public constructor
@@ -117,6 +123,12 @@ public class FragmentTwo extends Fragment {
         super.onResume();
         Log.d(TAG, "onResume, reset fragment lock to false.");
         ((MainActivity)getActivity()).setFragmentLock(false);
+
+
+        ObjectAnimator animation = ObjectAnimator.ofFloat(mLinearLayout, "translationX", 250f);
+        animation.setDuration(1000);
+        animation.start();
+
     }
 
     @Override
@@ -168,6 +180,9 @@ public class FragmentTwo extends Fragment {
     private void initUI() {
         mBtnClose = (Button) mView.findViewById(R.id.two_close_btn);
         mBtnF1 = (Button) mView.findViewById(R.id.two_f1_btn);
+
+        mLinearLayout = (LinearLayout) mView.findViewById(R.id.linear_layout_two);
+        mLinearLayout.setX(-600f);
 
         mBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
