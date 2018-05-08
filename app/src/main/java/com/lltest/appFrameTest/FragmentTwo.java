@@ -107,7 +107,7 @@ public class FragmentTwo extends Fragment {
             mListener = (OnFragmentInteractionListener2) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnFragmentInteractionListenerCard1");
         }
     }
 

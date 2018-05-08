@@ -97,10 +97,6 @@ public class Activity4 extends Activity2 {
     protected void onStop() {
         Log.v(TAG, "onStop()");
         super.onStop();
-
-        //onRemoveFromRecents();
-        //Log.v(TAG, "calling exitApplication");
-        //ExitActivity.exitApplication(this);
     }
 
     @Override
