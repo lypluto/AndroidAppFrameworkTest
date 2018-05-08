@@ -27,7 +27,7 @@ import com.lltest.webview.Frag1WebViewListener;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@Link FragmentOne.OnFragmentInteractionListener} interface
+ * {@Link FragmentOne.OnFragmentInteractionListenerCard1} interface
  * to handle interaction events.
  * Use the {@link FragmentOne#newInstance} factory method to
  * create an instance of this fragment.
@@ -164,7 +164,7 @@ public class FragmentOne extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnFragmentInteractionListenerCard1");
         }
 
     }

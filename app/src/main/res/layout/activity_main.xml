@@ -97,14 +97,6 @@
                             android:clickable="true" />
 
                         <Button
-                            android:id="@+id/sub_act3_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:text="@string/db_sub_act"
-                            android:textStyle="bold" />
-
-                        <Button
                             android:id="@+id/f2_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -129,6 +121,14 @@
                             android:clickable="true"
                             android:paddingLeft="25dp"
                             android:text="@string/timer" />
+
+                        <Button
+                            android:id="@+id/sub_act3_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:text="@string/db_sub_act"
+                            android:textStyle="bold" />
 
                         <Button
                             android:id="@+id/btnSharedPrefsTest"
@@ -163,9 +163,10 @@
                             android:clickable="true" />
 
                         <Button
+                            android:id="@+id/btnViewPager"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tbd"
+                            android:text="@string/go_to_view_pager"
                             android:textStyle="bold"
                             android:clickable="true" />
 

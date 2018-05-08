@@ -18,7 +18,8 @@ import android.widget.LinearLayout;
 import com.lltest.util.Constants;
 
 /**
- * Fragment 3
+ * This is a fragment demonstrates hint dialog process.
+ *
  */
 
 public class Fragment3 extends Fragment {
@@ -93,7 +94,7 @@ public class Fragment3 extends Fragment {
             mListener = (OnFragmentInteractionListener3) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnFragmentInteractionListenerCard1");
         }
     }
 

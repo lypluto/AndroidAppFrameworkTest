@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements
     private Button mBtnF1, mBtnF2, mBtnActivity2, mBtnSubAct3, mBtnSharedPrefsTest, mBtnWifiTest;
     private Button mBtnClearInfo;
     private Button mBtnF3;
+    private Button mBtnViewPager;
 
     private Button mBtnDoAlias, mBtnClearAlias;
 
@@ -139,8 +140,8 @@ public class MainActivity extends AppCompatActivity implements
         // In OnCreate or custome view constructor (which extends one of Android views)
         //detector = new GestureDetectorCompat(getApplicationContext(), gestureDetector);
 
-        initUI();
-        init();     // init UI
+        initUI();           // init UI components
+        initPart2();        // register receivers, init global variables
 
     }
 
@@ -161,8 +162,11 @@ public class MainActivity extends AppCompatActivity implements
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "unregister broadcast receivers.");
+        /*
+        // TODO: recover this when need detect wifi status
         unregisterReceiver(mWifiReceiver);
         unregisterReceiver(myRssiChangeReceiver);
+        */
     }
 
     /**
@@ -178,6 +182,21 @@ public class MainActivity extends AppCompatActivity implements
         intent.putExtras(sendBundle);    // add bundle to the intent
         startActivity(intent);
         finish();     // finish main activity after start act 2.
+    }
+
+    /**
+     * Try to start view pager test activity from this activity
+     */
+    public void startViewPagerActivity() {
+        String infoStr = mTxtDebug1.getText().toString();
+        Bundle sendBundle = new Bundle();
+        sendBundle.putString(ACT_1_INFO_KEY, infoStr);
+
+        Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);      // new intent from
+        // main act to act 2;
+        intent.putExtras(sendBundle);    // add bundle to the intent
+        startActivity(intent);
+        finish();     // finish main activity after start new activity.
     }
 
     /**
@@ -276,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements
         mBtnWifiTest = (Button) findViewById(R.id.btnWifiTest);
         mBtnDoAlias = (Button) findViewById(R.id.btnDoAlias);
         mBtnClearAlias = (Button) findViewById(R.id.btnClearAlias);
+        mBtnViewPager = (Button) findViewById(R.id.btnViewPager);
 
         mSwitchTimer = (Switch) findViewById(R.id.timer_switch);
 
@@ -407,16 +427,27 @@ public class MainActivity extends AppCompatActivity implements
                 }
             }
         });
+
+        mBtnViewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnViewPager is clicked");
+                startViewPagerActivity();
+            }
+        });
     }
 
     // initialize:
-    private void init() {
+    private void initPart2() {
 
         // register broadcast receivers:
+        // TODO: recover this when need detect wifi status
+        /*
         this.registerReceiver(this.mWifiReceiver,
                 new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION));
         this.registerReceiver(this.myRssiChangeReceiver,
                 new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
+                */
 
         StringBuilder sb = new StringBuilder("");
 

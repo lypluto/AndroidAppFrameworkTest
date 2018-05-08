@@ -17,6 +17,7 @@
     <string name="kill_time_label">Kill Time</string>
     <string name="do_alias_label">Do Alias</string>
     <string name="clear_alias_label">Clear Alias</string>
+    <string name="go_to_view_pager">ViewPager</string>
 
     <!-- switch labels -->
     <string name="timer">Timer Test</string>
@@ -68,5 +69,6 @@
     <string name="url_label">URL: </string>
     <string name="default_url">https://lypluto.github.io/tinyWebTest/</string>
     <string name="url_dialog">URL Dialog</string>
+    <string name="title_activity_view_pager">ViewPagerActivity</string>
 
 </resources>
