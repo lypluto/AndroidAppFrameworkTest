@@ -18,6 +18,8 @@ public class Constants {
     
     // Test: change from lenovo laptop
 
+    // TEST: change from harman desktop
+
 
     // fragment tags:
     public static final String FRAGMENT_ONE_TAG = "fragment_one";
