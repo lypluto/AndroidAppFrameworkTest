@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.lltest.ui.LoginActivity;
 import com.lltest.util.Constants;
 import com.lltest.util.GeneralUtil;
 import com.lltest.util.NetworkUtil;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements
     private Button mBtnClearInfo;
     private Button mBtnF3;
     private Button mBtnViewPager;
+    private Button mBtnLogin;
 
     private Button mBtnDoAlias, mBtnClearAlias;
 
@@ -199,6 +201,18 @@ public class MainActivity extends AppCompatActivity implements
         finish();     // finish main activity after start new activity.
     }
 
+    public void startLoginActivity() {
+        String infoStr = mTxtDebug1.getText().toString();
+        Bundle sendBundle = new Bundle();
+        sendBundle.putString(ACT_1_INFO_KEY, infoStr);
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);      // new intent from
+        // main act to act 2;
+        intent.putExtras(sendBundle);    // add bundle to the intent
+        startActivity(intent);
+        finish();     // finish main activity after start new activity.
+    }
+
     /**
      * Try to start a sub-activity from this activity,
      * and waiting for the return data from the sub-activity.
@@ -298,6 +312,8 @@ public class MainActivity extends AppCompatActivity implements
         mBtnViewPager = (Button) findViewById(R.id.btnViewPager);
 
         mSwitchTimer = (Switch) findViewById(R.id.timer_switch);
+
+        mBtnLogin = findViewById(R.id.btnLogin);
 
         mTxtDebug1 = (TextView) findViewById(R.id.txt_debug_1);
         mTxtDebug2 = (TextView) findViewById(R.id.txt_debug_2);
@@ -433,6 +449,14 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 Log.d(TAG, "mBtnViewPager is clicked");
                 startViewPagerActivity();
+            }
+        });
+
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnF1 is clicked");
+                startLoginActivity();
             }
         });
     }
