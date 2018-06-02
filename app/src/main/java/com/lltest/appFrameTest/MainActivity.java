@@ -29,12 +29,18 @@ import android.widget.TextView;
 import com.lltest.ui.LoginActivity;
 import com.lltest.util.Constants;
 import com.lltest.util.GeneralUtil;
+import com.lltest.util.JsonUtil;
+import com.lltest.util.LogUtil;
 import com.lltest.util.NetworkUtil;
 import com.lltest.util.ReminderConstants;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static com.lltest.util.Constants.DUMMY_TEST_JSON_STRING;
 
 public class MainActivity extends AppCompatActivity implements
         FragmentOne.OnFragmentInteractionListener,
@@ -507,6 +513,7 @@ public class MainActivity extends AppCompatActivity implements
         sb.append("Is Right to Left? ").append(isRtlStr).append("\n");
 
         // [4] logic checking is one-handed mode enabled or not:
+        /*
         try {
             int oneHandFlag = Settings.System.getInt(getContentResolver(), Settings.System
                     .SEM_ONE_HAND_ANY_SCREEN_RUNNING);
@@ -518,7 +525,21 @@ public class MainActivity extends AppCompatActivity implements
             }
         } catch (Settings.SettingNotFoundException e) {
             Log.e(TAG, "NO one-hand mode setting!");
-        }
+        }*/
+
+        // [5] json parsing test:
+        String testMsgBodyString = DUMMY_TEST_JSON_STRING;
+
+        int statusCode = JsonUtil.getInnerStatusFromMsgBody(testMsgBodyString);
+        JSONObject body = JsonUtil.getInnerBodyFromMsgBody(testMsgBodyString);
+        String reason = JsonUtil.getInnerReasonFromMsgBody(testMsgBodyString);
+        String extra = JsonUtil.getInnerExtraFromMsgBody(testMsgBodyString);
+
+        LogUtil.v(TAG, "status: " + statusCode);
+        LogUtil.v(TAG, "body: " + String.valueOf(body));
+        LogUtil.v(TAG, "reason: " + reason);
+        LogUtil.v(TAG, "extra: " + extra);
+
 
         // UPDATE INFO 1:
         updateDebugLog1(sb.toString());

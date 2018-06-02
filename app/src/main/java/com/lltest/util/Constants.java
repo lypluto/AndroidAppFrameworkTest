@@ -6,7 +6,7 @@ package com.lltest.util;
 
 public class Constants {
 
-    public static final String APP_PREFIX = "AppFwTest_";
+    public static final String APP_PREFIX = "APP_FW_TEST_";
 
     public static final int REQUEST_CODE = 1001;
 
@@ -29,6 +29,10 @@ public class Constants {
     public static final String FRAGMENT_LOGIN_TAG = "fragment_login";
     public static final String FRAGMENT_REGISTER_TAG = "fragment_register";
     public static final String FRAGMENT_SETUP_PROFILE_TAG = "fragment_setup_profile";
+
+    public static final String DUMMY_TEST_JSON_STRING = "{\"data\":{\"status\":5," +
+            "\"body\":{\"id\":1,\"username\":\"test user\",\"phone\":\"123456789\"}," +
+            "\"reason\":\"no reason\",\"extra\":\"no extra\"},\"hash\":\"\",\"signature\":\"\"}";
 
 
 }
