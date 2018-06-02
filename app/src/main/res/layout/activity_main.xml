@@ -171,9 +171,10 @@
                             android:clickable="true" />
 
                         <Button
+                            android:id="@+id/btnLogin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tbd"
+                            android:text="@string/go_to_login"
                             android:textStyle="bold"
                             android:clickable="true" />
 

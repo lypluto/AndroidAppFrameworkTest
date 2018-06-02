@@ -6,11 +6,7 @@ package com.lltest.util;
 
 public class Constants {
 
-    public static final String APP_PREFIX = "AppFwTest_";
-
-    public static final String FRAGMENT_ONE_TAG = "fragment_one";
-    public static final String FRAGMENT_TWO_TAG = "fragment_two";
-    public static final String FRAGMENT_SHARED_PREFS_TAG = "fragment_shared_prefs_test";
+    public static final String APP_PREFIX = "APP_FW_TEST_";
 
     public static final int REQUEST_CODE = 1001;
 
@@ -19,5 +15,24 @@ public class Constants {
     public static final int SWIPE_MIN_DISTANCE = 120;
     public static final int SWIPE_MAX_OFF_PATH = 250;
     public static final int SWIPE_THRESHOLD_VELOCITY = 200;
+    
+    // Test: change from lenovo laptop
+
+    // TEST: change from harman desktop
+
+
+    // fragment tags:
+    public static final String FRAGMENT_ONE_TAG = "fragment_one";
+    public static final String FRAGMENT_TWO_TAG = "fragment_two";
+    public static final String FRAGMENT_SHARED_PREFS_TAG = "fragment_shared_prefs_test";
+
+    public static final String FRAGMENT_LOGIN_TAG = "fragment_login";
+    public static final String FRAGMENT_REGISTER_TAG = "fragment_register";
+    public static final String FRAGMENT_SETUP_PROFILE_TAG = "fragment_setup_profile";
+
+    public static final String DUMMY_TEST_JSON_STRING = "{\"data\":{\"status\":5," +
+            "\"body\":{\"id\":1,\"username\":\"test user\",\"phone\":\"123456789\"}," +
+            "\"reason\":\"no reason\",\"extra\":\"no extra\"},\"hash\":\"\",\"signature\":\"\"}";
+
 
 }

@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_cover_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.lltest.ui.LoginActivity">
+
+    <LinearLayout
+        android:id="@+id/gap_1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/login_cover_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/login_cover_txt_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGIN Cover Info..."
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center_horizontal" />
+
+    <!-- splitMotionEvents false is necessary to forbid click multiple buttons at the same time -->
+    <LinearLayout
+        android:id="@+id/login_cover_page_button_pad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:splitMotionEvents="false"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:text="@string/label_login"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:clickable="true" />
+
+        <LinearLayout
+            android:id="@+id/gap_between_btns"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"></LinearLayout>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:text="@string/label_register"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:clickable="true" />
+    </LinearLayout>
+
+
+</LinearLayout>
+

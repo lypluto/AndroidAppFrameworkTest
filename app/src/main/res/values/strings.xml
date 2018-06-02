@@ -18,6 +18,7 @@
     <string name="do_alias_label">Do Alias</string>
     <string name="clear_alias_label">Clear Alias</string>
     <string name="go_to_view_pager">ViewPager</string>
+    <string name="go_to_login">LOG IN</string>
 
     <!-- switch labels -->
     <string name="timer">Timer Test</string>
@@ -70,5 +71,26 @@
     <string name="default_url">https://lypluto.github.io/tinyWebTest/</string>
     <string name="url_dialog">URL Dialog</string>
     <string name="title_activity_view_pager">ViewPagerActivity</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <!-- Login and register strings START -->
+    <string name="label_login">Log in</string>
+    <string name="label_register">Register</string>
+    <string name="label_btn_get_code">Safety Code</string>
+
+    <!-- Login and register strings END -->
 
 </resources>

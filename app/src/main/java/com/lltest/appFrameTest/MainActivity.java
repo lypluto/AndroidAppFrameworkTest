@@ -26,14 +26,21 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.lltest.ui.LoginActivity;
 import com.lltest.util.Constants;
 import com.lltest.util.GeneralUtil;
+import com.lltest.util.JsonUtil;
+import com.lltest.util.LogUtil;
 import com.lltest.util.NetworkUtil;
 import com.lltest.util.ReminderConstants;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static com.lltest.util.Constants.DUMMY_TEST_JSON_STRING;
 
 public class MainActivity extends AppCompatActivity implements
         FragmentOne.OnFragmentInteractionListener,
@@ -55,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements
     private Button mBtnClearInfo;
     private Button mBtnF3;
     private Button mBtnViewPager;
+    private Button mBtnLogin;
 
     private Button mBtnDoAlias, mBtnClearAlias;
 
@@ -199,6 +207,18 @@ public class MainActivity extends AppCompatActivity implements
         finish();     // finish main activity after start new activity.
     }
 
+    public void startLoginActivity() {
+        String infoStr = mTxtDebug1.getText().toString();
+        Bundle sendBundle = new Bundle();
+        sendBundle.putString(ACT_1_INFO_KEY, infoStr);
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);      // new intent from
+        // main act to act 2;
+        intent.putExtras(sendBundle);    // add bundle to the intent
+        startActivity(intent);
+        finish();     // finish main activity after start new activity.
+    }
+
     /**
      * Try to start a sub-activity from this activity,
      * and waiting for the return data from the sub-activity.
@@ -298,6 +318,8 @@ public class MainActivity extends AppCompatActivity implements
         mBtnViewPager = (Button) findViewById(R.id.btnViewPager);
 
         mSwitchTimer = (Switch) findViewById(R.id.timer_switch);
+
+        mBtnLogin = findViewById(R.id.btnLogin);
 
         mTxtDebug1 = (TextView) findViewById(R.id.txt_debug_1);
         mTxtDebug2 = (TextView) findViewById(R.id.txt_debug_2);
@@ -435,6 +457,14 @@ public class MainActivity extends AppCompatActivity implements
                 startViewPagerActivity();
             }
         });
+
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "mBtnF1 is clicked");
+                startLoginActivity();
+            }
+        });
     }
 
     // initialize:
@@ -483,6 +513,7 @@ public class MainActivity extends AppCompatActivity implements
         sb.append("Is Right to Left? ").append(isRtlStr).append("\n");
 
         // [4] logic checking is one-handed mode enabled or not:
+        /*
         try {
             int oneHandFlag = Settings.System.getInt(getContentResolver(), Settings.System
                     .SEM_ONE_HAND_ANY_SCREEN_RUNNING);
@@ -494,7 +525,21 @@ public class MainActivity extends AppCompatActivity implements
             }
         } catch (Settings.SettingNotFoundException e) {
             Log.e(TAG, "NO one-hand mode setting!");
-        }
+        }*/
+
+        // [5] json parsing test:
+        String testMsgBodyString = DUMMY_TEST_JSON_STRING;
+
+        int statusCode = JsonUtil.getInnerStatusFromMsgBody(testMsgBodyString);
+        JSONObject body = JsonUtil.getInnerBodyFromMsgBody(testMsgBodyString);
+        String reason = JsonUtil.getInnerReasonFromMsgBody(testMsgBodyString);
+        String extra = JsonUtil.getInnerExtraFromMsgBody(testMsgBodyString);
+
+        LogUtil.v(TAG, "status: " + statusCode);
+        LogUtil.v(TAG, "body: " + String.valueOf(body));
+        LogUtil.v(TAG, "reason: " + reason);
+        LogUtil.v(TAG, "extra: " + extra);
+
 
         // UPDATE INFO 1:
         updateDebugLog1(sb.toString());

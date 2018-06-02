@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">AndroidAppFrameworkTest</string>
+
+    <!-- button labels -->
+    <string name="go_to_f1">打开F1</string>
+    <string name="go_to_f2">GO TO F2</string>
+    <string name="go_to_f3">GO TO F3</string>
+    <string name="go_home">GO HOME</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="close_myself">Close Myself</string>
+    <string name="go_to_activity1">Activity 1</string>
+    <string name="go_to_activity2">Activity 2</string>
+    <string name="start_sub_act_3">Sub Activity 3</string>
+    <string name="click_test_label">Click Test</string>
+    <string name="clear_info_label">Clear Info</string>
+    <string name="show_time_label">Show Time</string>
+    <string name="kill_time_label">Kill Time</string>
+    <string name="do_alias_label">Do Alias</string>
+    <string name="clear_alias_label">Clear Alias</string>
+    <string name="go_to_view_pager">ViewPager</string>
+    <string name="go_to_login">登录</string>
+
+    <!-- switch labels -->
+    <string name="timer">Timer Test</string>
+    <string name="time_service_label">Time Service</string>
+
+    <!-- Texts -->
+    <string name="tbd">TBD</string>
+    <string name="info">Information</string>
+    <string name="opt">Operations</string>
+    <string name="others">Other Info</string>
+    <string name="frag1_label">Fragment 01</string>
+    <string name="frag2_label">Fragment 02</string>
+
+    <string name="debug_log_1">debug log 1</string>
+    <string name="debug_log_2">debug log 2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- DB test labels -->
+    <string name="db_sub_act">DB Test</string>
+    <string name="title">Student Details</string>
+    <string name="roll_no">Enter Roll #: </string>
+    <string name="name">Enter Name: </string>
+    <string name="marks">Enter Marks: </string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="modify">Modify</string>
+    <string name="view">View</string>
+    <string name="view_all">View All</string>
+    <string name="show_info">Show Info</string>
+
+    <!-- Shared Prefs labels -->
+    <string name="shared_prefs_label">SharedPrefs Test</string>
+    <string name="shared_prefs_page_title">New High Score Details:</string>
+    <string name="shared_prefs_delete">Delete</string>
+    <string name="shared_prefs_update">Update</string>
+    <string name="shared_prefs_view">View</string>
+    <string name="shared_prefs_back">Back</string>
+    <string name="shared_prefs_text_enter_new_high">Enter new high score:</string>
+    <string name="saved_high_score_default">saved_high_score_default</string>
+    <string name="saved_high_score">saved_high_score</string>
+
+    <string name="wifi_test_label">Wifi Test</string>
+
+    <!-- WebView test labels -->
+    <string name="webViewTestLabel">WebView Test Page</string>
+    <string name="webViewLoadUrlSwitch">Load URL</string>
+    <string name="url_label">URL: </string>
+    <string name="default_url">https://lypluto.github.io/tinyWebTest/</string>
+    <string name="url_dialog">URL Dialog</string>
+    <string name="title_activity_view_pager">ViewPagerActivity</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <!-- Login and register strings START -->
+    <string name="label_login">登录</string>
+    <string name="label_register">注册</string>
+    <string name="label_btn_get_code">获取安全码</string>
+
+    <!-- Login and register strings END -->
+
+</resources>
